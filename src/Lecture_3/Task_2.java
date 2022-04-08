@@ -2,9 +2,10 @@ package Lecture_3;
 
 public class Task_2 {
     public static void main(String[] args) {
-        getFactorialFor(4);
+        getFactorialFor(11);
+        getFactorialFor(3);
         getFactorialWhile(4);
-        getFactorialDoWhile(4);
+        getFactorialDoWhile(5);
     }
 
     public static void getFactorialFor(int a) {
