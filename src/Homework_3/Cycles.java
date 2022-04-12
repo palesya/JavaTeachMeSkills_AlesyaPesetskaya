@@ -32,24 +32,9 @@ public class Cycles {
     }
 
     public static void countSum() {
-        Scanner scanner = new Scanner(System.in);
-        boolean validValue = false;
         int sum = 0;
-        int number = 0;
-        while (!validValue) {
-            System.out.println("Please enter the whole positive number to count the sum of all numbers from 1 to this number.");
-            if (!scanner.hasNextInt()) {
-                System.out.println("You've entered invalid value.");
-                scanner.next();
-            } else {
-                number = scanner.nextInt();
-                if (number <= 0) {
-                    System.out.println("You've entered invalid value.");
-                } else {
-                    validValue = true;
-                }
-            }
-        }
+        System.out.println("The sum of all numbers from 1 to entered number will be counted.");
+        int number=checkWholePositiveNumber();
         for (int i = 0; i <= number; i++) {
             sum = sum + i;
         }
@@ -88,5 +73,26 @@ public class Cycles {
         }
         System.out.println("");
         System.out.println("-----------------------------------------------------------");
+    }
+
+    public static int checkWholePositiveNumber(){
+        Scanner scanner = new Scanner(System.in);
+        boolean validValue=false;
+        int number = 0;
+        while (!validValue) {
+            System.out.println("Please enter the whole positive number.");
+            if (!scanner.hasNextInt()) {
+                System.out.println("You've entered invalid value.");
+                scanner.next();
+            } else {
+                number = scanner.nextInt();
+                if (number <= 0) {
+                    System.out.println("You've entered invalid value.");
+                } else {
+                    validValue = true;
+                }
+            }
+        }
+        return number;
     }
 }

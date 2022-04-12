@@ -28,10 +28,9 @@ public class AdditionalTask {
     public static void countDeposit() {
         Scanner scanner = new Scanner(System.in);
         boolean validDeposit = false;
-        boolean validMonths = false;
         float initialAmount = 0;
         float currentDeposit;
-        int numberOfMonths = 0;
+        int numberOfMonths;
         while (!validDeposit) {
             System.out.println("Please enter the deposit amount (positive number).");
             if (!scanner.hasNextFloat()) {
@@ -46,20 +45,8 @@ public class AdditionalTask {
                 }
             }
         }
-        while (!validMonths) {
-            System.out.println("Please enter the number of months for deposit (positive whole number).");
-            if (!scanner.hasNextInt()) {
-                System.out.println("You've entered invalid value.");
-                scanner.next();
-            } else {
-                numberOfMonths = scanner.nextInt();
-                if (numberOfMonths <= 0) {
-                    System.out.println("You've entered invalid value.");
-                } else {
-                    validMonths = true;
-                }
-            }
-        }
+        System.out.println("To know the number of months for deposit.");
+        numberOfMonths=Cycles.checkWholePositiveNumber();
         currentDeposit = initialAmount;
         for (int i = 0; i < numberOfMonths; i++) {
             float percentage = currentDeposit * 7 / 100;

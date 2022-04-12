@@ -12,24 +12,7 @@ public class ControlStructures {
     }
 
     public static void getMonthName() {
-        Scanner scanner = new Scanner(System.in);
-        boolean validValue = false;
-        int numberOfMonth = 0;
-        while (!validValue) {
-            System.out.println("Please enter the number of month from 1 to 12. To define the name of corresponding month.");
-            if (!scanner.hasNextInt()) {
-                System.out.println("You've entered invalid value.");
-                scanner.next();
-            } else {
-                numberOfMonth = scanner.nextInt();
-                if (numberOfMonth <= 0 || numberOfMonth > 12) {
-                    System.out.println("Your entered number " + numberOfMonth + " doesn't correspond to any month.");
-                    System.out.println("-----------------------------------------------------------");
-                } else {
-                    validValue = true;
-                }
-            }
-        }
+        int numberOfMonth = checkValidMonth();
         String nameOfMonth = null;
         switch (numberOfMonth) {
             case 1:
@@ -73,24 +56,7 @@ public class ControlStructures {
     }
 
     public static void getSeasonName() {
-        Scanner scanner = new Scanner(System.in);
-        boolean validValue = false;
-        int numberOfMonth = 0;
-        while (!validValue) {
-            System.out.println("Please enter the number of month from 1 to 12. To define the name of corresponding season.");
-            if (!scanner.hasNextInt()) {
-                System.out.println("You've entered invalid value.");
-                scanner.next();
-            } else {
-                numberOfMonth = scanner.nextInt();
-                if (numberOfMonth <= 0 || numberOfMonth > 12) {
-                    System.out.println("Your entered number " + numberOfMonth + " doesn't correspond to any season.");
-                    System.out.println("-----------------------------------------------------------");
-                } else {
-                    validValue = true;
-                }
-            }
-        }
+        int numberOfMonth = checkValidMonth();
         String nameOfSeason;
         if (numberOfMonth > 2 && numberOfMonth < 6) {
             nameOfSeason = "Spring";
@@ -199,6 +165,28 @@ public class ControlStructures {
                 break;
         }
         System.out.println("Your entered number " + numberOfColor + " corresponds to rainbow color: " + color);
+    }
+
+    public static int checkValidMonth(){
+        boolean validValue=false;
+        int numberOfMonth=0;
+        Scanner scanner = new Scanner(System.in);
+        while (!validValue) {
+            System.out.println("Please enter the number of month from 1 to 12. To define the name of corresponding month.");
+            if (!scanner.hasNextInt()) {
+                System.out.println("You've entered invalid value.");
+                scanner.next();
+            } else {
+                numberOfMonth = scanner.nextInt();
+                if (numberOfMonth <= 0 || numberOfMonth > 12) {
+                    System.out.println("Your entered number " + numberOfMonth + " doesn't correspond to any month.");
+                    System.out.println("-----------------------------------------------------------");
+                } else {
+                    validValue = true;
+                }
+            }
+        }
+        return numberOfMonth;
     }
 }
 
