@@ -17,12 +17,17 @@ public class ControlStructures {
         int numberOfMonth = 0;
         while (!validValue) {
             System.out.println("Please enter the number of month from 1 to 12. To define the name of corresponding month.");
-            numberOfMonth = scanner.nextInt();
-            if (numberOfMonth <= 0 || numberOfMonth > 12) {
-                System.out.println("Your entered number " + numberOfMonth + " doesn't correspond to any month.");
-                System.out.println("-----------------------------------------------------------");
+            if (!scanner.hasNextInt()) {
+                System.out.println("You've entered invalid value.");
+                scanner.next();
             } else {
-                validValue = true;
+                numberOfMonth = scanner.nextInt();
+                if (numberOfMonth <= 0 || numberOfMonth > 12) {
+                    System.out.println("Your entered number " + numberOfMonth + " doesn't correspond to any month.");
+                    System.out.println("-----------------------------------------------------------");
+                } else {
+                    validValue = true;
+                }
             }
         }
         String nameOfMonth = null;
@@ -73,12 +78,17 @@ public class ControlStructures {
         int numberOfMonth = 0;
         while (!validValue) {
             System.out.println("Please enter the number of month from 1 to 12. To define the name of corresponding season.");
-            numberOfMonth = scanner.nextInt();
-            if (numberOfMonth <= 0 || numberOfMonth > 12) {
-                System.out.println("Your entered number " + numberOfMonth + " doesn't correspond to any season.");
-                System.out.println("-----------------------------------------------------------");
+            if (!scanner.hasNextInt()) {
+                System.out.println("You've entered invalid value.");
+                scanner.next();
             } else {
-                validValue = true;
+                numberOfMonth = scanner.nextInt();
+                if (numberOfMonth <= 0 || numberOfMonth > 12) {
+                    System.out.println("Your entered number " + numberOfMonth + " doesn't correspond to any season.");
+                    System.out.println("-----------------------------------------------------------");
+                } else {
+                    validValue = true;
+                }
             }
         }
         String nameOfSeason;
@@ -101,12 +111,17 @@ public class ControlStructures {
         boolean validValue = false;
         int number = 0;
         while (!validValue) {
-            System.out.println("Please enter the whole number.");
-            number = scanner.nextInt();
-            if (number % 2 != 0 && (Math.abs(number % 2) != 1)) {
+            System.out.println("Please enter the whole number to define if it is even or not.");
+            if (!scanner.hasNextInt()) {
                 System.out.println("You've entered invalid value.");
+                scanner.next();
             } else {
-                validValue = true;
+                number = scanner.nextInt();
+                if (number % 2 != 0 && (Math.abs(number % 2) != 1)) {
+                    System.out.println("You've entered invalid value.");
+                } else {
+                    validValue = true;
+                }
             }
         }
         if (number % 2 == 0) {
@@ -118,7 +133,16 @@ public class ControlStructures {
 
     public static void getWeather() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Укажите, сколько градусов сегодня на улице (целое число), чтобы узнать, холодно или нет.");
+        boolean validValue = false;
+        while (!validValue) {
+            System.out.println("Укажите, сколько градусов сегодня на улице (целое число), чтобы узнать, холодно или нет.");
+            if (!scanner.hasNextInt()) {
+                System.out.println("Вы не ввели целое число.");
+                scanner.next();
+            } else {
+                validValue = true;
+            }
+        }
         int temperature = scanner.nextInt();
         String weather;
         if (temperature > -5) {
@@ -138,13 +162,17 @@ public class ControlStructures {
         int numberOfColor = 0;
         while (!validValue) {
             System.out.println("Please enter the number of rainbow color from 1 to 7. To define the color of corresponding number.");
-            numberOfColor = scanner.nextInt();
-
-            if (numberOfColor <= 0 || numberOfColor > 7) {
-                System.out.println("Your entered number " + numberOfColor + " doesn't correspond to any rainbow color.");
-                System.out.println("-----------------------------------------------------------");
+            if (!scanner.hasNextInt()) {
+                System.out.println("You've entered invalid value.");
+                scanner.next();
             } else {
-                validValue = true;
+                numberOfColor = scanner.nextInt();
+                if (numberOfColor <= 0 || numberOfColor > 7) {
+                    System.out.println("Your entered number " + numberOfColor + " doesn't correspond to any rainbow color.");
+                    System.out.println("-----------------------------------------------------------");
+                } else {
+                    validValue = true;
+                }
             }
         }
         switch (numberOfColor) {

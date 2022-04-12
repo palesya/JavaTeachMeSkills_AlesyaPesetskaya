@@ -38,11 +38,16 @@ public class Cycles {
         int number = 0;
         while (!validValue) {
             System.out.println("Please enter the whole positive number to count the sum of all numbers from 1 to this number.");
-            number = scanner.nextInt();
-            if (number <= 0) {
+            if (!scanner.hasNextInt()) {
                 System.out.println("You've entered invalid value.");
+                scanner.next();
             } else {
-                validValue = true;
+                number = scanner.nextInt();
+                if (number <= 0) {
+                    System.out.println("You've entered invalid value.");
+                } else {
+                    validValue = true;
+                }
             }
         }
         for (int i = 0; i <= number; i++) {

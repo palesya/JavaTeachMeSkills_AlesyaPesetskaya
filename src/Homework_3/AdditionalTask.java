@@ -34,20 +34,30 @@ public class AdditionalTask {
         int numberOfMonths = 0;
         while (!validDeposit) {
             System.out.println("Please enter the deposit amount (positive number).");
-            initialAmount = scanner.nextFloat();
-            if (initialAmount <= 0) {
+            if (!scanner.hasNextFloat()) {
                 System.out.println("You've entered invalid value.");
+                scanner.next();
             } else {
-                validDeposit = true;
+                initialAmount = scanner.nextFloat();
+                if (initialAmount <= 0) {
+                    System.out.println("You've entered invalid value.");
+                } else {
+                    validDeposit = true;
+                }
             }
         }
         while (!validMonths) {
             System.out.println("Please enter the number of months for deposit (positive whole number).");
-            numberOfMonths = scanner.nextInt();
-            if (numberOfMonths <= 0) {
+            if (!scanner.hasNextInt()) {
                 System.out.println("You've entered invalid value.");
+                scanner.next();
             } else {
-                validMonths = true;
+                numberOfMonths = scanner.nextInt();
+                if (numberOfMonths <= 0) {
+                    System.out.println("You've entered invalid value.");
+                } else {
+                    validMonths = true;
+                }
             }
         }
         currentDeposit = initialAmount;
@@ -63,10 +73,10 @@ public class AdditionalTask {
 
     public static void getMultiplicateTable() {
         System.out.println("Multiplicate Table:");
-        for(int i=1;i<11;i++){
+        for (int i = 1; i < 11; i++) {
             System.out.println("-----------");
-            for(int j=1;j<11;j++){
-                System.out.println(i +" * "+j+" = "+(i*j));
+            for (int j = 1; j < 11; j++) {
+                System.out.println(i + " * " + j + " = " + (i * j));
             }
         }
     }
