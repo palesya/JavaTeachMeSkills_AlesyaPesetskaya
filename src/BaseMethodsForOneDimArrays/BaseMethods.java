@@ -1,19 +1,13 @@
-package Homework_4;
+package BaseMethodsForOneDimArrays;
 
 import java.util.Scanner;
 
 public abstract class BaseMethods {
-    public static int[] createArray() {
+    public static int[] generateOneDimArray() {
         System.out.println("--------------------------------");
         System.out.println("Enter the length of Array.");
         int arrayLength = checkWholeNumber();
-        System.out.println("Enter the max value of Array.");
-        int maxValue = checkWholeNumber();
-        int[] arr = new int[arrayLength];
-        for (int i = 0; i < arrayLength; i++) {
-            arr[i] = (int) (Math.random() * (maxValue + 1));
-        }
-        return arr;
+        return createArray(arrayLength);
     }
 
     public static void checkIfFound(int[] arr) {
@@ -105,6 +99,10 @@ public abstract class BaseMethods {
 
     public static int[] createArrayOfLength(int arrayLength) {
         System.out.println("--------------------------------");
+        return createArray(arrayLength);
+    }
+
+    private static int[] createArray(int arrayLength){
         System.out.println("Enter the max value of Array.");
         int maxValue = checkWholeNumber();
         int[] arr = new int[arrayLength];

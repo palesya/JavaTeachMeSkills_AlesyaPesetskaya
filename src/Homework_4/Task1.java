@@ -2,12 +2,12 @@ package Homework_4;
 
 import java.util.Arrays;
 
-import static Homework_4.BaseMethods.createArray;
-import static Homework_4.BaseMethods.removeAllFoundValues;
+import static BaseMethodsForOneDimArrays.BaseMethods.generateOneDimArray;
+import static BaseMethodsForOneDimArrays.BaseMethods.removeAllFoundValues;
 
 public class Task1 {
     public static void main(String[] args) {
-        int[] array = createArray();
+        int[] array = generateOneDimArray();
         System.out.println("Initial array: " + Arrays.toString(array));
         //Удалите все вхождения заданного числа из массива.
         //В результате должен быть новый массив без указанного числа.

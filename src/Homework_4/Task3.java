@@ -2,7 +2,7 @@ package Homework_4;
 
 import java.util.Arrays;
 
-import static Homework_4.BaseMethods.*;
+import static BaseMethodsForOneDimArrays.BaseMethods.*;
 
 public class Task3 {
     public static void main(String[] args) {

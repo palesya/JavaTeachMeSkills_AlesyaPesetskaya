@@ -3,7 +3,7 @@ package Homework_4;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import static Homework_4.BaseMethods.checkWholeNumber;
+import static BaseMethodsForOneDimArrays.BaseMethods.checkWholeNumber;
 
 public class Task4 {
     public static void main(String[] args) {

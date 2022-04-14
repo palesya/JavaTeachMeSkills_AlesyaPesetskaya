@@ -1,23 +1,24 @@
 package Lecture_4;
 
 import java.util.Arrays;
-import java.util.Scanner;
+
+import static BaseMethodsForOneDimArrays.BaseMethods.checkWholeNumber;
 
 public class Task1 {
     public static void main(String[] args) {
         int[] arr = {4, 56, 2, 8, 45, 7, 3, 65, 18, 33};
         checkIfFoundAndReturnIndex(arr);
-        int [] arr1=removeFromArray(arr);
+        int[] arr1 = removeFromArray(arr);
         Array.printArray(arr1);
-        int maxValue=findMaxValue(arr);
+        int maxValue = findMaxValue(arr);
         int minValue = findMinValue(arr);
-        System.out.println("Min value of array is: "+minValue);
-        System.out.println("Max value of array is: "+maxValue);
+        System.out.println("Min value of array is: " + minValue);
+        System.out.println("Max value of array is: " + maxValue);
         Arrays.sort(arr);
         System.out.println(Arrays.toString(arr));
-        System.out.println("Index of found element= "+Arrays.binarySearch(arr,7));
+        System.out.println("Index of found element= " + Arrays.binarySearch(arr, 7));
         int[] copyArray = new int[arr.length];
-        System.arraycopy(arr,0,copyArray,0,arr.length);
+        System.arraycopy(arr, 0, copyArray, 0, arr.length);
         System.out.println(Arrays.toString(copyArray));
     }
 
@@ -38,23 +39,6 @@ public class Task1 {
         return index;
     }
 
-    public static int checkWholeNumber() {
-        Scanner scanner = new Scanner(System.in);
-        boolean validValue = false;
-        int number = 0;
-        while (!validValue) {
-            System.out.println("Please enter the whole number.");
-            if (!scanner.hasNextInt()) {
-                System.out.println("You've entered invalid value.");
-                scanner.next();
-            } else {
-                number = scanner.nextInt();
-                validValue = true;
-            }
-        }
-        return number;
-    }
-
     public static int[] removeFromArray(int[] arr) {
         int[] arr1;
         int index = checkIfFoundAndReturnIndex(arr);
@@ -64,28 +48,29 @@ public class Task1 {
                 arr1[i] = arr[i];
             }
             for (int i = index + 1; i < arr.length; i++) {
-                arr1[i-1] = arr[i];
+                arr1[i - 1] = arr[i];
             }
         } else {
             arr1 = arr;
-        }return arr1;
+        }
+        return arr1;
     }
 
-    private static int findMaxValue(int[] arr){
+    private static int findMaxValue(int[] arr) {
         int maxValue = arr[0];
-        for (int i=1;i<arr.length;i++) {
-            if(arr[i]>maxValue){
-                maxValue=arr[i];
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] > maxValue) {
+                maxValue = arr[i];
             }
         }
         return maxValue;
     }
 
-    private static int findMinValue(int[] arr){
+    private static int findMinValue(int[] arr) {
         int minValue = arr[0];
-        for (int i=1;i<arr.length;i++) {
-            if(arr[i]<minValue){
-                minValue=arr[i];
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] < minValue) {
+                minValue = arr[i];
             }
         }
         return minValue;

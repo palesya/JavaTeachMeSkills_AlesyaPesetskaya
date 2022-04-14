@@ -3,7 +3,7 @@ package Homework_4;
 import java.util.Arrays;
 import java.util.Random;
 
-import static Homework_4.BaseMethods.checkWholeNumber;
+import static BaseMethodsForOneDimArrays.BaseMethods.checkWholeNumber;
 
 public class Task6 {
     public static void main(String[] args) {
@@ -14,7 +14,6 @@ public class Task6 {
 
     public static String[] generateArrayFromNames() {
         String[] names = {"Alesya", "Bob", "Ivan", "Nikolay", "Pavel", "Kate", "Sofi", "Victor", "Petya", "Anna", "Vladimir","Melany","Alex","Andrey"};
-        Random random = new Random();
         System.out.println("--------------------------------");
         System.out.println("Enter the length of Array.");
         int arrayLength = checkWholeNumber();
