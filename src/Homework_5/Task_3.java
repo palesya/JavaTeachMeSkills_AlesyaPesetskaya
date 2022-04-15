@@ -2,7 +2,7 @@ package Homework_5;
 
 import static BaseMethodsForTwoDimArrays.BaseMethods.printTwoDimArray;
 
-public class Task3 {
+public class Task_3 {
     public static void main(String[] args) {
         int[][] firstArray = {{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 0, 0}};
         int[][] secondArray = {{1, 2, 3}, {1, 1, 1}, {0, 0, 0}, {2, 1, 0}};
