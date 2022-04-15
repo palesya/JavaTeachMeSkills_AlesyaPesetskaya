@@ -13,9 +13,23 @@ public class BaseMethods {
         System.out.println("Enter the max value of Array.");
         int maxValue = checkWholeNumber();
         int[][] arr = new int[numberOfLines][numberOfRows];
-
         for (int i = 0; i < numberOfLines; i++) {
             for (int j = 0; j < numberOfRows; j++) {
+                arr[i][j] = (int) (Math.random() * (maxValue + 1));
+            }
+        }
+        return arr;
+    }
+
+    public static int[][] generateSquareArray() {
+        System.out.println("--------------------------------");
+        System.out.println("Enter size of square array.");
+        int size = checkWholeNumber();
+        System.out.println("Enter the max value of Array.");
+        int maxValue = checkWholeNumber();
+        int[][] arr = new int[size][size];
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
                 arr[i][j] = (int) (Math.random() * (maxValue + 1));
             }
         }
