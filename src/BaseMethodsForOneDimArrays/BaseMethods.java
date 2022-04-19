@@ -72,7 +72,7 @@ public abstract class BaseMethods {
                 maxValue = arr[i];
             }
         }
-        System.out.println("Max value of array is: "+maxValue);
+        System.out.println("Max value of array is: " + maxValue);
         return maxValue;
     }
 
@@ -83,7 +83,7 @@ public abstract class BaseMethods {
                 minValue = arr[i];
             }
         }
-        System.out.println("Min value of array is: "+minValue);
+        System.out.println("Min value of array is: " + minValue);
         return minValue;
     }
 
@@ -92,8 +92,8 @@ public abstract class BaseMethods {
         for (int i = 0; i < arr.length; i++) {
             sumOfAllElements += arr[i];
         }
-        double avg=(double)sumOfAllElements / arr.length;
-        System.out.println("The average number is: "+avg);
+        double avg = (double) sumOfAllElements / arr.length;
+        System.out.println("The average number is: " + avg);
         return avg;
     }
 
@@ -102,7 +102,7 @@ public abstract class BaseMethods {
         return createArray(arrayLength);
     }
 
-    private static int[] createArray(int arrayLength){
+    private static int[] createArray(int arrayLength) {
         System.out.println("Enter the max value of Array.");
         int maxValue = checkWholeNumber();
         int[] arr = new int[arrayLength];
@@ -110,5 +110,34 @@ public abstract class BaseMethods {
             arr[i] = (int) (Math.random() * (maxValue + 1));
         }
         return arr;
+    }
+
+    public static void bubbleSorting(int[] array) {
+        int temp;
+        int arrLength = array.length;
+        for (int i = 0; i < arrLength - 1; i++)
+            for (int j = 0; j < arrLength - i - 1; j++) {
+                if (array[j] > array[j + 1]) {
+                    temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                }
+            }
+    }
+
+    public static void selectionSort(int[] array) {
+        int indexOfMinElement;
+        int arrLength = array.length;
+        for (int i = 0; i < arrLength - 1; i++) {
+            indexOfMinElement = i;
+            for (int j = i + 1; j < arrLength; j++) {
+                if (array[j] < array[indexOfMinElement]) {
+                    indexOfMinElement = j;
+                }
+            }
+            int temp = array[indexOfMinElement];
+            array[indexOfMinElement]=array[i];
+            array[i]=temp;
+        }
     }
 }

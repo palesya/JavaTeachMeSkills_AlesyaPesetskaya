@@ -1,15 +1,14 @@
-package Homework_4;
+package Lecture_6;
 
 import java.util.Arrays;
 
 import static BaseMethodsForOneDimArrays.BaseMethods.*;
 
-public class Task7 {
+public class SortingFromHomework {
     public static void main(String[] args) {
         int[] array = generateOneDimArray();
         System.out.println("Initial array: " + Arrays.toString(array));
-        bubbleSorting(array);
+        selectionSort(array);
         System.out.println("Sorted array: " + Arrays.toString(array));
     }
 }
-
