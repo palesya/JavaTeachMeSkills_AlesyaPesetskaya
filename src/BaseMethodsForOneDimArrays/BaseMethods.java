@@ -89,8 +89,8 @@ public abstract class BaseMethods {
 
     public static double countAverage(int[] arr) {
         int sumOfAllElements = 0;
-        for (int i = 0; i < arr.length; i++) {
-            sumOfAllElements += arr[i];
+        for (int j : arr) {
+            sumOfAllElements += j;
         }
         double avg = (double) sumOfAllElements / arr.length;
         System.out.println("The average number is: " + avg);
@@ -136,8 +136,29 @@ public abstract class BaseMethods {
                 }
             }
             int temp = array[indexOfMinElement];
-            array[indexOfMinElement]=array[i];
-            array[i]=temp;
+            array[indexOfMinElement] = array[i];
+            array[i] = temp;
         }
+    }
+
+    public static double checkPositiveNumber() {
+        Scanner scanner = new Scanner(System.in);
+        boolean validValue = false;
+        double number = 0;
+        while (!validValue) {
+            System.out.println("Please enter positive number.");
+            if (!scanner.hasNextDouble()) {
+                System.out.println("You've entered invalid value.");
+                scanner.next();
+            } else {
+                number = scanner.nextDouble();
+                if (number < 0) {
+                    System.out.println("You've entered invalid value.");
+                } else {
+                    validValue = true;
+                }
+            }
+        }
+        return number;
     }
 }

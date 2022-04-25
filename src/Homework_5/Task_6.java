@@ -3,7 +3,6 @@ package Homework_5;
 import java.util.Arrays;
 
 import static BaseMethodsForTwoDimArrays.BaseMethods.generateTwoDimArray;
-import static BaseMethodsForTwoDimArrays.BaseMethods.printTwoDimArray;
 
 public class Task_6 {
     public static void main(String[] args) {

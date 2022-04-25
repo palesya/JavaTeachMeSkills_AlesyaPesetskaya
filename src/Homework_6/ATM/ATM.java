@@ -11,26 +11,22 @@ public class ATM {
         this.numberOfHundreds = numberOfHundreds;
     }
 
-    public ATM addMoneyOnlyTwenties(int numberOfTwenties) {
+    public void addMoneyOnlyTwenties(int numberOfTwenties) {
         this.numberOfTwenties += numberOfTwenties;
-        return this;
     }
 
-    public ATM addMoneyOnlyFifties(int numberOfFifties) {
+    public void addMoneyOnlyFifties(int numberOfFifties) {
         this.numberOfFifties += numberOfFifties;
-        return this;
     }
 
-    public ATM addMoneyOnlyHundreds(int numberOfHundreds) {
+    public void addMoneyOnlyHundreds(int numberOfHundreds) {
         this.numberOfHundreds += numberOfHundreds;
-        return this;
     }
 
-    public ATM addDifferentCurrencies(int numberOfTwenties, int numberOfFifties, int numberOfHundreds) {
+    public void addDifferentCurrencies(int numberOfTwenties, int numberOfFifties, int numberOfHundreds) {
         this.numberOfTwenties += numberOfTwenties;
         this.numberOfFifties += numberOfFifties;
         this.numberOfHundreds += numberOfHundreds;
-        return this;
     }
 
     public boolean getMoney(int sum) {

@@ -2,18 +2,20 @@ package Homework_6.CreditCard_Task;
 
 public class Calculations {
     public static void main(String[] args) {
-        CreditCard creditCard=new CreditCard();
-        CreditCard[] creditCards=creditCard.generateThreeCardsViaScanner();
+        CreditCard[] creditCards=CardGenerator.generateThreeCardsViaScanner();
         creditCards[0].getCardInfo();
         creditCards[1].getCardInfo();
         creditCards[2].getCardInfo();
-        creditCards[0].addSum();
-        creditCards[1].addSum();
-        creditCards[2].withdraw();
+        creditCards[0].addSumToCard(300);
+        creditCards[1].addSumToCard(400);
+        creditCards[2].withdrawSumFromCard(500);
+        System.out.println("-------------------------------");
         System.out.println("Cards' data after changes:");
         creditCards[0].getCardInfo();
         creditCards[1].getCardInfo();
         creditCards[2].getCardInfo();
     }
+
+
 
 }
