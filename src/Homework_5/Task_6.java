@@ -1,14 +1,16 @@
 package Homework_5;
 
+import java.util.Arrays;
+
 import static BaseMethodsForTwoDimArrays.BaseMethods.generateTwoDimArray;
 import static BaseMethodsForTwoDimArrays.BaseMethods.printTwoDimArray;
 
 public class Task_6 {
     public static void main(String[] args) {
         int[][] arr = generateTwoDimArray();
-        printTwoDimArray(arr);
+        System.out.println("Initial array is: "+Arrays.deepToString(arr));
         sortArrayInLines(arr);
-        printTwoDimArray(arr);
+        System.out.println("Sorted array is: "+Arrays.deepToString(arr));
     }
 
     private static void sortArrayInLines(int[][] arr) {
