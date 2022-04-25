@@ -1,7 +1,5 @@
 package Homework_7.Documents;
 
-import Homework_7.Figures.Figure;
-
 import java.util.Date;
 
 public class Main {

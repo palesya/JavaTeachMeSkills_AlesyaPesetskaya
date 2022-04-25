@@ -1,7 +1,5 @@
 package Homework_7.Documents;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public abstract class Document {

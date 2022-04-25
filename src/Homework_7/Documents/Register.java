@@ -4,10 +4,6 @@ public class Register {
 
     private Document [] documents=new Document[10];
 
-    public Document[] getDocuments() {
-        return documents;
-    }
-
     public void saveDocInRegister(Document document){
         for (int i=0;i<documents.length;i++){
             if(documents[i]==null){
