@@ -1,5 +1,9 @@
 package Homework_7.Documents;
 
+import Homework_7.Documents.documents.ContractForSupply;
+import Homework_7.Documents.documents.ContractWithEmployee;
+import Homework_7.Documents.documents.FinancialInvoice;
+
 import java.util.Date;
 
 public class Main {
@@ -7,7 +11,7 @@ public class Main {
 
         Document contractForSupply = new ContractForSupply(12, new Date(), "Milk", 300);
         Document financialInvoice = new FinancialInvoice(18, new Date(), 3567, "QA12");
-        Document contractWithEmployee = new ContractWithEmployee(34, new Date(), "12/12/2025", "Ivan Ivanov");
+        Document contractWithEmployee = new ContractWithEmployee(34, new Date(), new Date(), "Ivan Ivanov");
 
         Register register = new Register();
 
@@ -15,7 +19,7 @@ public class Main {
         for (Document el : documents) {
             System.out.println("------------------------------");
             register.saveDocInRegister(el);
-            register.getDocInformation(el);
         }
+        register.printDocs();
     }
 }
