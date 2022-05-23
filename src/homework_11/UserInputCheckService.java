@@ -10,12 +10,13 @@ public class UserInputCheckService {
         this.userRepository = userRepository;
     }
 
-    public boolean validateInput(String line){
+    public boolean validateInput(String line) {
         boolean ifMenuPrint = false;
         if (Objects.equals(line.toLowerCase(), "get")) {
             GetElementService getElementService = new GetElementService();
             try {
-                ifMenuPrint = getElementService.printFirstElementAndRemoveIt(userRepository);
+                getElementService.printFirstElementAndRemoveIt(userRepository);
+                ifMenuPrint = true;
             } catch (RepositoryEmptyException e) {
                 System.out.println(e.getMessage());
             }
@@ -23,7 +24,7 @@ public class UserInputCheckService {
             UserInputSaveService saveService = new UserInputSaveService(userRepository);
             try {
                 saveService.saveInput(line);
-                ifMenuPrint=true;
+                ifMenuPrint = true;
             } catch (RepositoryLengthException e) {
                 System.out.println(e.getMessage());
             }
