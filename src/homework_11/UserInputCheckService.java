@@ -4,12 +4,17 @@ import java.util.Objects;
 
 public class UserInputCheckService {
 
-    public boolean validateInput(String line, UserInputRepository userRepository) {
-        boolean ifMenuPrint = false;
+    UserInputRepository userRepository;
+
+    public UserInputCheckService(UserInputRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public boolean validateInput(String line) {
+        boolean ifMenuPrint;
         if (Objects.equals(line.toLowerCase(), "get")) {
             GetElementService getElementService = new GetElementService();
-            getElementService.printFirstElementAndRemoveIt(userRepository);
-            ifMenuPrint = getElementService.isIfPrinted();
+            ifMenuPrint = getElementService.printFirstElementAndRemoveIt(userRepository);
         } else {
             UserInputSaveService saveService = new UserInputSaveService(userRepository);
             ifMenuPrint = saveService.saveInput(line);

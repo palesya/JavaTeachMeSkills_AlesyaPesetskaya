@@ -9,10 +9,10 @@ public class Main {
         System.out.println("Welcome to 'User Repository' program!");
         Scanner scanner = new Scanner(System.in);
         printMenu();
-        UserInputCheckService validationService = new UserInputCheckService();
+        UserInputCheckService validationService = new UserInputCheckService(userInputRepository);
         String input = scanner.nextLine();
         while (!Objects.equals(input, "exit")) {
-            if (validationService.validateInput(input, userInputRepository))
+            if (validationService.validateInput(input))
             {
                 printMenu();
             }

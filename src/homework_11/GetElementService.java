@@ -2,16 +2,11 @@ package homework_11;
 
 public class GetElementService {
 
-    private boolean ifPrinted;
-
-    public boolean isIfPrinted() {
-        return ifPrinted;
-    }
-
-    public void printFirstElementAndRemoveIt(UserInputRepository inputRepository) {
+    public boolean printFirstElementAndRemoveIt(UserInputRepository inputRepository) {
         String[] userData = inputRepository.getUserRepository();
         String firstElement;
         String[] arrDestination = new String[0];
+        boolean ifPrinted;
         if (userData.length == 0) {
             try {
                 throw new RepositoryEmptyException("Repository is empty!!!");
@@ -28,6 +23,7 @@ public class GetElementService {
             ifPrinted=true;
         }
         inputRepository.setUserRepository(arrDestination);
+        return ifPrinted;
     }
 
 }
