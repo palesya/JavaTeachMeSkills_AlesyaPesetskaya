@@ -5,7 +5,7 @@ public class GetElementService {
     public void printFirstElementAndRemoveIt(UserInputRepository inputRepository) throws RepositoryEmptyException {
         String[] userData = inputRepository.getUserRepository();
         String firstElement;
-        String[] arrDestination = new String[0];
+        String[] arrDestination;
         if (userData.length == 0) {
             throw new RepositoryEmptyException("Repository is empty!!!");
         } else {
