@@ -10,24 +10,16 @@ public class UserInputSaveService {
         this.userInputRepository = userInputRepository;
     }
 
-    public boolean saveInput(String string) {
-        boolean ifSaved;
+    public void saveInput(String string) throws RepositoryLengthException {
         String[] userRepository = userInputRepository.getUserRepository();
         if (userRepository.length == 5) {
-            try {
-                throw new RepositoryLengthException(userInputRepository,"Repository  is full!!!");
-            } catch (RepositoryLengthException e) {
-                System.out.println(e.getMessage());
-            }
-            ifSaved=false;
+            throw new RepositoryLengthException(userInputRepository, "Repository  is full!!!");
         } else {
             userRepository = userInputRepository.getUserRepository();
             userRepository = Arrays.copyOf(userRepository, userRepository.length + 1);
             userRepository[userRepository.length - 1] = string;
             System.out.println("Value '" + string + "' is successfully saved in repository at number " + userRepository.length);
             userInputRepository.setUserRepository(userRepository);
-            ifSaved=true;
         }
-        return ifSaved;
     }
 }
