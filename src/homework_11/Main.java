@@ -1,5 +1,6 @@
 package homework_11;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
@@ -8,11 +9,13 @@ public class Main {
         System.out.println("Welcome to 'User Repository' program!");
         Scanner scanner = new Scanner(System.in);
         printMenu();
-        UserInputValidationService validationService = new UserInputValidationService();
+        UserInputCheckService validationService = new UserInputCheckService();
         String input = scanner.nextLine();
-        while (validationService.validateInput(input, userInputRepository)) {
-            if(validationService.ifMenuPrint){
-            printMenu();}
+        while (!Objects.equals(input, "exit")) {
+            if (validationService.validateInput(input, userInputRepository))
+            {
+                printMenu();
+            }
             input = scanner.next();
         }
     }

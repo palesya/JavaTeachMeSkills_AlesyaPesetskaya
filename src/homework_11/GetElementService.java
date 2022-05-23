@@ -9,22 +9,22 @@ public class GetElementService {
     }
 
     public void printFirstElementAndRemoveIt(UserInputRepository inputRepository) {
-        String[] stringRepository = inputRepository.getUserRepository();
+        String[] userData = inputRepository.getUserRepository();
         String firstElement;
         String[] arrDestination = new String[0];
-        if (stringRepository.length == 0) {
+        if (userData.length == 0) {
             try {
-                throw new RepositoryEmptyException(inputRepository, "Repository is empty!!!");
+                throw new RepositoryEmptyException("Repository is empty!!!");
             } catch (RepositoryEmptyException e) {
                 System.out.println(e.getMessage());
             }
             ifPrinted=false;
         } else {
-            firstElement = stringRepository[0];
+            firstElement = userData[0];
             System.out.println("First element of User Repository is: " + firstElement);
-            arrDestination = new String[stringRepository.length - 1];
-            int remainingElements = stringRepository.length - 1;
-            System.arraycopy(stringRepository, 1, arrDestination, 0, remainingElements);
+            arrDestination = new String[userData.length - 1];
+            int remainingElements = userData.length - 1;
+            System.arraycopy(userData, 1, arrDestination, 0, remainingElements);
             ifPrinted=true;
         }
         inputRepository.setUserRepository(arrDestination);

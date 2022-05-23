@@ -2,11 +2,8 @@ package homework_11;
 
 public class RepositoryEmptyException extends Exception {
 
-    UserInputRepository inputRepository;
-
-    public RepositoryEmptyException(UserInputRepository inputRepository,String message) {
+    public RepositoryEmptyException(String message) {
         super(message);
-        this.inputRepository = inputRepository;
     }
 
     @Override
