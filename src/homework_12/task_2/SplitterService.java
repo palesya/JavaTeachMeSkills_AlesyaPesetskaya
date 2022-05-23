@@ -9,11 +9,11 @@ import java.util.regex.Pattern;
 
 public class SplitterService {
 
-    Pattern pattern = Pattern.compile("^[A-Z]*:");
-    String line;
-    String currentRole = null;
-
     public void splitTextByRoles(String path) throws IOException {
+
+        Pattern pattern = Pattern.compile("^[A-Z]*:");
+        String line;
+        String currentRole = null;
 
         LineNumberReader lnr = new LineNumberReader(new FileReader(path));
         String currentDate = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
