@@ -2,15 +2,9 @@ package homework_11;
 
 public class RepositoryLengthException extends Exception {
 
-    UserInputRepository inputRepository;
 
-    public RepositoryLengthException(UserInputRepository inputRepository, String message) {
+    public RepositoryLengthException(String message) {
         super(message);
-        this.inputRepository = inputRepository;
-    }
-
-    public UserInputRepository getInputRepository() {
-        return inputRepository;
     }
 
     @Override

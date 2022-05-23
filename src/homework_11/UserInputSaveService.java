@@ -13,7 +13,7 @@ public class UserInputSaveService {
     public void saveInput(String string) throws RepositoryLengthException {
         String[] userRepository = userInputRepository.getUserRepository();
         if (userRepository.length == 5) {
-            throw new RepositoryLengthException(userInputRepository, "Repository  is full!!!");
+            throw new RepositoryLengthException("Repository  is full!!!");
         } else {
             userRepository = userInputRepository.getUserRepository();
             userRepository = Arrays.copyOf(userRepository, userRepository.length + 1);
