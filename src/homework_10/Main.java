@@ -8,7 +8,7 @@ public class Main {
         Worker worker4 = new Worker("Elena", "Davidova", 3);
         Worker worker5 = new Worker("Pavel", "Good", 10);
         Director director1 = new Director("Alexey", "Sidorov", 12);
-        Director director2 = new Director("Sergey", "Main", 10);
+        Director director2 = new Director("Sergey", "MainMap", 10);
         Director director3 = new Director("Petya", "Pesetskiy", 5);
         Employee[] allEmployees={worker1,worker2,worker3,worker4,worker5,director1,director2,director3};
         for(Employee el:allEmployees){

@@ -16,7 +16,7 @@ public class Task_5 {
         int[] diagonalElements = new int[arr.length];
         for (int i = 0; i < arr.length; i++)
             diagonalElements[i] = arr[i][i];
-        System.out.println("Main diagonal's elements are:" + Arrays.toString(diagonalElements));
+        System.out.println("MainMap diagonal's elements are:" + Arrays.toString(diagonalElements));
     }
 
     private static void printSecondaryDiagonal(int[][] arr) {
