@@ -1,6 +1,6 @@
 package homework_11;
 
-public class GetElementService {
+public class ElementService {
 
     public void printFirstElementAndRemoveIt(UserInputRepository inputRepository) throws RepositoryEmptyException {
         String[] userData = inputRepository.getUserRepository();

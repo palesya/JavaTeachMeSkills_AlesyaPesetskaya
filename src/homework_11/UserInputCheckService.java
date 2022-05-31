@@ -13,7 +13,7 @@ public class UserInputCheckService {
     public boolean validateInput(String line) {
         boolean ifMenuPrint = false;
         if (Objects.equals(line.toLowerCase(), "get")) {
-            GetElementService getElementService = new GetElementService();
+            ElementService getElementService = new ElementService();
             try {
                 getElementService.printFirstElementAndRemoveIt(userRepository);
                 ifMenuPrint = true;
