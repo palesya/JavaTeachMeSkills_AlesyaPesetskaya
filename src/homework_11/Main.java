@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        UserInputRepository userInputRepository = new UserInputRepository();
+        UserInputRepositoryService userInputRepository = new UserInputRepositoryService();
         System.out.println("Welcome to 'User Repository' program!");
         Scanner scanner = new Scanner(System.in);
         printMenu();

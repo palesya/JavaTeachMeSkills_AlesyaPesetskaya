@@ -4,9 +4,9 @@ import java.util.Objects;
 
 public class UserInputCheckService {
 
-    UserInputRepository userRepository;
+    UserInputRepositoryService userRepository;
 
-    public UserInputCheckService(UserInputRepository userRepository) {
+    public UserInputCheckService(UserInputRepositoryService userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -21,9 +21,8 @@ public class UserInputCheckService {
                 System.out.println(e.getMessage());
             }
         } else {
-            UserInputSaveService saveService = new UserInputSaveService(userRepository);
             try {
-                saveService.saveInput(line);
+                userRepository.saveInput(line);
                 ifMenuPrint = true;
             } catch (RepositoryLengthException e) {
                 System.out.println(e.getMessage());
