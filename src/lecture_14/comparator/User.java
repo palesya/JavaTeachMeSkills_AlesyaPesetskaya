@@ -1,7 +1,5 @@
 package lecture_14.comparator;
 
-import java.util.Objects;
-
 public class User {
     private String name;
     private int age;
