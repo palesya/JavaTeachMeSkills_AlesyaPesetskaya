@@ -6,13 +6,8 @@ public class ArrayService {
 
     private Map<Integer, Integer> getMapOfValuesAndNumberOfRepeats(int[] array) {
         Map<Integer, Integer> duplicates = new HashMap<>();
-        for (int i = 0; i < array.length; i++) {
-            if (!duplicates.containsKey(array[i])) {
-                duplicates.put(array[i], 1);
-            } else {
-                int newValue = duplicates.get(array[i]) + 1;
-                duplicates.replace(array[i], newValue);
-            }
+        for (int i : array) {
+            duplicates.put(i, duplicates.getOrDefault(i, 0) + 1);
         }
         return duplicates;
     }
@@ -28,8 +23,8 @@ public class ArrayService {
         }
         for (Map.Entry<Integer, Integer> entry : duplicates.entrySet()) {
             if (Objects.equals(entry.getValue(), maxRepeats)) {
-               maxValues.put(entry.getKey(),entry.getValue());
-                System.out.println("The maximum number of repeats in array is "+entry.getValue()+" for number "+ entry.getKey());
+                maxValues.put(entry.getKey(), entry.getValue());
+                System.out.println("The maximum number of repeats in array is " + entry.getValue() + " for number " + entry.getKey());
             }
         }
     }
