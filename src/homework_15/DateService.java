@@ -8,28 +8,27 @@ import java.util.Date;
 
 public class DateService {
 
-    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
     public void printNameDayOfWeek(String input) throws ParseException {
-        Date date = sdf.parse(input);
+        Date date = dateFormat.parse(input);
         DateFormat format = new SimpleDateFormat("EEEE");
         String dayName = format.format(date);
-        System.out.println("Введённый день ("+sdf.format(date)+") : " + dayName);
+        System.out.println("Введённый день (" + dateFormat.format(date) + ") : " + dayName);
     }
 
     //если вторник сегодня, то будет отображаться дата следующего вторника
-    public void printDateOfNextTuesday() throws ParseException {
+    public void printDateOfNextTuesday() {
         Calendar calendar = Calendar.getInstance();
-        Date date = sdf.parse("31-05-2022");
-        calendar.setTime(date);
+        Date time = calendar.getTime();
+        calendar.setTime(time);
         int todayDayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-        int days = Calendar.TUESDAY - todayDayOfWeek;
-        if (days > 0) {
-            calendar.add(Calendar.DAY_OF_WEEK, days);
-        }else{
-            calendar.add(Calendar.DAY_OF_WEEK, 7+days);
-        }
-        System.out.println("Дата следующего вторника: "+sdf.format(calendar.getTime()));
+        int daysFromTuesday = Calendar.TUESDAY - todayDayOfWeek;
+
+        int numberOfDays = daysFromTuesday > 0 ? daysFromTuesday : 7 + daysFromTuesday;
+
+        calendar.add(Calendar.DAY_OF_WEEK, numberOfDays);
+        System.out.println("Дата следующего вторника: " + dateFormat.format(calendar.getTime()));
     }
 
 }
