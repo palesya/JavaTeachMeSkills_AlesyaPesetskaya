@@ -24,7 +24,8 @@ public class Main {
 
         List<Integer> intListEven = intList
                 .stream()
-                .filter(el -> el % 2 == 0 && el >= 7 && el <= 17)
+                .filter(el -> el >= 7 && el <= 17)
+                .filter(el -> el % 2 == 0)
                 .collect(Collectors.toList());
         System.out.println("Even elements from 7 to 17:");
         System.out.println(intListEven);
@@ -39,7 +40,7 @@ public class Main {
 
         List<Integer> intFirstFourSorted = intList
                 .stream()
-                .sorted((el1,el2) -> el1 > el2?1:-1)
+                .sorted(Integer::compareTo)
                 .limit(4)
                 .collect(Collectors.toList());
 

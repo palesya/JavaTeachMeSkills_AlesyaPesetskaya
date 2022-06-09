@@ -6,10 +6,10 @@ public class Family {
 
     private String sName;
     private String address;
-    private Double averageSalaryPerMember;
+    private long averageSalaryPerMember;
     private List<Child> listOfChildren;
 
-    public Family(String sName, String address, Double averageSalaryPerMember, List<Child> listOfChildren) {
+    public Family(String sName, String address, long averageSalaryPerMember, List<Child> listOfChildren) {
         this.sName = sName;
         this.address = address;
         this.averageSalaryPerMember = averageSalaryPerMember;
@@ -24,7 +24,7 @@ public class Family {
         return address;
     }
 
-    public Double getAverageSalaryPerMember() {
+    public long getAverageSalaryPerMember() {
         return averageSalaryPerMember;
     }
 

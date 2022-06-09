@@ -13,32 +13,31 @@ public class Main {
     public static void main(String[] args) {
 
         List<Family> familiesList = Arrays.asList(
-                new Family("Ivanov", "Minsk, Angarskaya 30, 45", 500.0, Arrays.asList(
+                new Family("Ivanov", "Minsk, Angarskaya 30, 45", 500, Arrays.asList(
                         new Child("Ivan", 3, MAN),
                         new Child("Petya", 15, MAN),
                         new Child("Katya", 20, WOMAN)
                 )),
-                new Family("Petrov", "Borisov, Narodnaya 21,5", 627.0, Arrays.asList(
+                new Family("Petrov", "Borisov, Narodnaya 21,5", 627, Arrays.asList(
                         new Child("Alex", 2, MAN),
                         new Child("Alexandra", 7, WOMAN),
                         new Child("Oleg", 13, MAN)
                 )),
-                new Family("Sidorov", "Kopische, Nebesnaya 1,1", 2000.5, Arrays.asList(
+                new Family("Sidorov", "Kopische, Nebesnaya 1,1", 2000, Arrays.asList(
                         new Child("Maxim", 25, MAN),
                         new Child("Marina", 30, WOMAN)
                 ))
         );
 
-        Map<String, Double> familiesMap = familiesList
+        Map<String, Long> familiesMap = familiesList
                 .stream()
                 .collect(Collectors.toMap(Family::getSName, Family::getAverageSalaryPerMember));
         System.out.println("Map of families where key is surname and value is average salary per member:\n" + familiesMap);
 
-        int sumOfBoys = familiesList.stream()
+        long sumOfBoys = familiesList.stream()
                 .flatMap(fam -> fam.getListOfChildren().stream())
                 .filter(child -> child.getSex() == MAN)
-                .mapToInt(el -> 1)
-                .sum();
+                .count();
         System.out.println("Number of boys in all families: " + sumOfBoys);
 
         List<Child> listOfGirls = familiesList.stream()
