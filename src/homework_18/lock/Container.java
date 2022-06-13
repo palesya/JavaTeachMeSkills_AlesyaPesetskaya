@@ -1,10 +1,9 @@
 package homework_18.lock;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 
-public class Container extends Thread {
+public class Container {
 
     private List<Object> objectList;
     private Lock lock;

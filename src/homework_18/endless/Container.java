@@ -6,7 +6,7 @@ import java.util.List;
 import static homework_18.endless.Container.ACTION.ADD_ACTION;
 import static homework_18.endless.Container.ACTION.REMOVE_ACTION;
 
-public class Container extends Thread {
+public class Container {
 
     private List<Object> objectList;
 
@@ -56,12 +56,6 @@ public class Container extends Thread {
             e.printStackTrace();
         }
         return found;
-    }
-
-
-    @Override
-    public void run() {
-        super.run();
     }
 
     @Override
