@@ -1,21 +1,23 @@
 package homework_18.lock;
 
+import homework_18.endless.AbstractContainer;
+
 import java.util.List;
 import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
-public class Container {
+public class Container extends AbstractContainer {
 
     private List<Object> objectList;
-    private Lock lock;
+    private Lock lock = new ReentrantLock();
 
     enum ACTION {
         ADD_ACTION,
         REMOVE_ACTION
     }
 
-    public Container(List<Object> objectList, Lock lock) {
+    public Container(List<Object> objectList) {
         this.objectList = objectList;
-        this.lock = lock;
     }
 
     public void saveRemoveObject(Object object, ACTION action) {

@@ -6,7 +6,7 @@ import java.util.List;
 import static homework_18.endless.Container.ACTION.ADD_ACTION;
 import static homework_18.endless.Container.ACTION.REMOVE_ACTION;
 
-public class Container {
+public class Container extends AbstractContainer{
 
     private List<Object> objectList;
 
