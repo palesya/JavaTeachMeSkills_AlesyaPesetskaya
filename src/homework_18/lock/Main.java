@@ -2,43 +2,28 @@ package homework_18.lock;
 
 import java.util.ArrayList;
 
-import static homework_18.lock.Container.ACTION.ADD_ACTION;
-import static homework_18.lock.Container.ACTION.REMOVE_ACTION;
-
-
 public class Main {
     public static void main(String[] args) throws InterruptedException {
 
         Container container = new Container(new ArrayList<>());
         Object object = new Object();
 
-        while (true) {
-            Thread threadModify1 = new Thread(() -> container
-                    .saveRemoveObject(object, ADD_ACTION));
+        AddRemoveThread addRemoveThread1 = new AddRemoveThread(container, object);
+        AddRemoveThread addRemoveThread2 = new AddRemoveThread(container, object);
+        AddRemoveThread addRemoveThread3 = new AddRemoveThread(container, object);
 
-            Thread threadModify2 = new Thread(() -> container
-                    .saveRemoveObject(object, REMOVE_ACTION));
+        addRemoveThread1.start();
+        addRemoveThread2.start();
+        addRemoveThread3.start();
 
-            Thread threadModify3 = new Thread(() -> container
-                    .saveRemoveObject(object, ADD_ACTION));
+        SearchThread searchThread1 = new SearchThread(container, object);
+        SearchThread searchThread2 = new SearchThread(container, object);
+        SearchThread searchThread3 = new SearchThread(container, object);
 
-            Thread threadFind1 = new Thread(() -> container
-                    .findObject(object));
-
-            Thread threadFind2 = new Thread(() -> container
-                    .findObject(object));
-
-            Thread threadFind3 = new Thread(() -> container
-                    .findObject(object));
-
-            threadModify1.start();
-            threadModify2.start();
-            threadModify3.start();
-            threadFind1.start();
-            threadFind2.start();
-            threadFind3.start();
-
-        }
+        searchThread1.start();
+        searchThread2.start();
+        searchThread3.start();
 
     }
+
 }
