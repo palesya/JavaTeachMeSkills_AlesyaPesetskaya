@@ -19,24 +19,25 @@ public class FamilyService {
         }
     }
 
-   public void printFamilySNameWithChildName(List<Family> familiesList, String name) {
+    public void printFamilySNameWithChildName(List<Family> familiesList, String name) {
         List<String> collect = familiesList
                 .stream()
-                .filter(el -> {
-                    List<Child> listOfChildren = el.getListOfChildren();
-                    for (Child child : listOfChildren) {
-                        if (Objects.equals(child.getName(), name)) {
-                            return true;
-                        }
-                    }
-                    return false;
-                }).map(Family::getSName).collect(Collectors.toList());
-        if(collect.size()==1) {
-            System.out.println("Family with child's name "+ name + " is found. It is family "+collect);
-        }else if(collect.size()==0){
+                .filter(el -> checkIfNameIsFound(el, name))
+                .map(Family::getSName).collect(Collectors.toList());
+        if (collect.size() == 1) {
+            System.out.println("Family with child's name " + name + " is found. It is family " + collect);
+        } else if (collect.size() == 0) {
             System.out.println("Family with child's name " + name + " is not found.");
-        }else {
-            System.out.println("Families with child's name "+ name + " are found. These are families: "+collect);
+        } else {
+            System.out.println("Families with child's name " + name + " are found. These are families: " + collect);
         }
     }
+
+    private boolean checkIfNameIsFound(Family el, String name) {
+        long count = el.getListOfChildren()
+                .stream()
+                .filter(n -> Objects.equals(n.getName(), name)).count();
+        return count > 0;
+    }
+
 }
