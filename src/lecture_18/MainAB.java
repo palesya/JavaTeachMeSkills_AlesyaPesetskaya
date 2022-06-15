@@ -11,7 +11,7 @@ public class MainAB {
         lock.lock();
         lock.unlock();
 
-        DifPrint difPrint=new DifPrint(lock);
+        DifPrint difPrint = new DifPrint(lock);
         Thread thread1 = new Thread(difPrint::print);
         thread1.start();
 
