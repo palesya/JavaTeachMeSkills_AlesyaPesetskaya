@@ -11,6 +11,10 @@ public class SearchThread extends Thread{
         this.object = object;
     }
 
+    public void setRun(boolean run) {
+        isRun = run;
+    }
+
     @Override
     public void run() {
        while (isRun){

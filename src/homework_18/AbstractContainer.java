@@ -44,7 +44,7 @@ public abstract class AbstractContainer {
             System.out.println("Search message before sleep");
             Thread.sleep(1000);
             System.out.println("Search message after sleep");
-            found = objectList.stream()
+            found = this.objectList.stream()
                     .filter(el -> el.equals(object)).count();
             if (found > 0) {
                 System.out.println("Object is found.");

@@ -5,9 +5,13 @@ import static homework_18.AbstractContainer.ACTION.REMOVE_ACTION;
 
 public class AddRemoveThread extends Thread{
 
-    boolean isRun = true;
+    volatile boolean isRun = true;
     Container container;
     Object object;
+
+    public void setRun(boolean run) {
+        isRun = run;
+    }
 
     public AddRemoveThread(Container container, Object object) {
         this.container = container;
