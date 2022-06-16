@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static homework_20.entity.Chocolate.Brand.*;
+import static homework_20.entity.Queries.GET_ID;
 
 public class Main {
 

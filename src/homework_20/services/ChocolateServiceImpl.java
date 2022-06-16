@@ -7,6 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static homework_20.entity.Queries.*;
 import static homework_20.entity.TypeAction.SAVE;
 import static homework_20.entity.TypeAction.UPDATE;
 
@@ -14,10 +15,6 @@ public class ChocolateServiceImpl implements ChocolateService {
 
     private Connection connection;
     private ChocolateValidator validator;
-
-    public static final String SAVE_CHOCOLATE = "insert into chocolates (brand, name, weight, id) values(?, ?, ?, ?)";
-    public static final String GET_ID = "select max(id)+1 as id from chocolates";
-    public static final String UPDATE_CHOCOLATE = "update chocolates set brand = ?,name = ?, weight = ? where id = ?";
 
     public ChocolateServiceImpl(Connection connection, ChocolateValidator validator) {
         this.connection = connection;
@@ -34,8 +31,7 @@ public class ChocolateServiceImpl implements ChocolateService {
         Chocolate chocolate = null;
         if (id != null) {
             try {
-                PreparedStatement preparedStatement = connection.prepareStatement(
-                        "select * from chocolates where id = ?");
+                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID.query);
                 preparedStatement.setInt(1, id);
                 ResultSet resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
@@ -52,7 +48,7 @@ public class ChocolateServiceImpl implements ChocolateService {
     public List<Chocolate> getAll() {
         List<Chocolate> chocolates = null;
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from chocolates");
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL.query);
             chocolates = getListFromResultSet(preparedStatement);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -65,7 +61,7 @@ public class ChocolateServiceImpl implements ChocolateService {
         List<Chocolate> chocolates = null;
         if (brand != null) {
             try {
-                PreparedStatement preparedStatement = connection.prepareStatement("select * from chocolates where brand = ?");
+                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_BRAND.query);
                 preparedStatement.setString(1, brand.name());
                 chocolates = getListFromResultSet(preparedStatement);
             } catch (SQLException e) {
@@ -79,7 +75,7 @@ public class ChocolateServiceImpl implements ChocolateService {
     public void delete(Integer id) {
         try {
             Statement statement = connection.createStatement();
-            statement.execute("delete from chocolates where id = " + id);
+            statement.execute(DELETE_BY_ID.query + id);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -87,7 +83,7 @@ public class ChocolateServiceImpl implements ChocolateService {
 
     @Override
     public void update(Chocolate chocolate) {
-       prepareAndExecuteStatement(UPDATE,chocolate);
+        prepareAndExecuteStatement(UPDATE, chocolate);
     }
 
     private Chocolate createChocolate(ResultSet resultSet) throws SQLException {
@@ -113,14 +109,14 @@ public class ChocolateServiceImpl implements ChocolateService {
             String query;
             int id = 0;
             if (type == SAVE) {
-                query = SAVE_CHOCOLATE;
+                query = SAVE_CHOCOLATE.query;
                 Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery(GET_ID);
+                ResultSet resultSet = statement.executeQuery(GET_ID.query);
                 if (resultSet.next()) {
                     id = resultSet.getInt("id");
                 }
             } else {
-                query = UPDATE_CHOCOLATE;
+                query = UPDATE_CHOCOLATE.query;
                 id = chocolate.getId();
             }
             PreparedStatement preparedStatement = connection.prepareStatement(query);
