@@ -13,11 +13,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import static homework_20.entity.Chocolate.Brand.*;
-import static homework_20.entity.Queries.GET_ID;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
         Connection connection = null;
         try {
@@ -51,7 +50,7 @@ public class Main {
         printService.getAllAndPrint(chocolateService);
 
         Chocolate chocolate = chocolateService.get(0);
-        System.out.println("Get chocolate by id = " + chocolate.getId() + ":\n" + chocolate+"\n");
+        System.out.println("Get chocolate by id = " + chocolate.getId() + ":\n" + chocolate + "\n");
 
         List<Chocolate> byBrand = chocolateService.getByBrand(NESTLE);
         System.out.println("Get chocolate by brand = " + byBrand.get(0).getBrand());
@@ -66,7 +65,7 @@ public class Main {
         System.out.println("All saved chocolates after removed chocolate with id = " + idForDelete + ":");
         printService.getAllAndPrint(chocolateService);
 
-
+        connection.close();
     }
 
 
