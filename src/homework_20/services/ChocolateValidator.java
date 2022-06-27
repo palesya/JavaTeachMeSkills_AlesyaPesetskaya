@@ -3,8 +3,8 @@ package homework_20.services;
 import homework_20.entity.TypeAction;
 import homework_20.exception.ChocolateValidationException;
 
-public interface ChocolateValidator<T> {
+public interface ChocolateValidator<Chocolate> {
 
-    void validate(T entity, TypeAction type) throws ChocolateValidationException;
+    void validate(Chocolate chocolate, TypeAction type) throws ChocolateValidationException;
 
 }
