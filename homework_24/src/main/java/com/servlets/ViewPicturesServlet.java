@@ -11,11 +11,7 @@ import java.io.IOException;
 public class ViewPicturesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        resp.sendRedirect("userPage.html");
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("userPage.html").forward(req, resp);
-    }
 }

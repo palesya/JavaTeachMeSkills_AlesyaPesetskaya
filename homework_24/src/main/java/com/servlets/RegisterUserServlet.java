@@ -1,8 +1,10 @@
 package com.servlets;
 
+import com.exceptions.SaveUserException;
 import com.objects.User;
 import com.objects.UserContainer;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,17 +15,24 @@ import java.io.IOException;
 @WebServlet("/adminPage")
 public class RegisterUserServlet extends HttpServlet {
 
-    UserContainer userContainer;
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendRedirect("adminPage.html");
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("adminPage.html").forward(req, resp);
+        UserContainer userContainer = new UserContainer();
         String login = req.getParameter("login");
-        String password = req.getParameter("password");
-        String sex = req.getParameter("sex");
-        String role = req.getParameter("role");
-        User user = new User(login, password, User.Role.valueOf(role), User.Sex.valueOf(sex));
-        userContainer.saveUser(user);
-        req.getRequestDispatcher("/success").forward(req, resp);
+        if (!userContainer.checkIfLoginExists(login)) {
+            String password = req.getParameter("password");
+            String sex = req.getParameter("sex");
+            String role = req.getParameter("role");
+            User user = new User(login, password, User.Role.valueOf(role), User.Sex.valueOf(sex));
+            userContainer.saveUser(user);
+            resp.sendRedirect("/homework_24/success");
+        } else {
+            throw new SaveUserException("Such login already exists.");
+        }
     }
 }

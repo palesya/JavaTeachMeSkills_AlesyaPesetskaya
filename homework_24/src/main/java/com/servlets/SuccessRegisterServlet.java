@@ -12,7 +12,7 @@ public class SuccessRegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("success.html").forward(req, resp);
-        resp.getWriter().println("Success");
+        resp.sendRedirect("success.html");
     }
+
 }
