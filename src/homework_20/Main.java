@@ -49,8 +49,11 @@ public class Main {
         System.out.println("All saved chocolates:");
         printService.getAllAndPrint(chocolateService);
 
+
         Chocolate chocolate = chocolateService.get(0);
-        System.out.println("Get chocolate by id = " + chocolate.getId() + ":\n" + chocolate + "\n");
+        if (chocolate != null) {
+            System.out.println("Get chocolate by id = " + chocolate.getId() + ":\n" + chocolate + "\n");
+        }
 
         List<Chocolate> byBrand = chocolateService.getByBrand(NESTLE);
         System.out.println("Get chocolate by brand = " + byBrand.get(0).getBrand());
