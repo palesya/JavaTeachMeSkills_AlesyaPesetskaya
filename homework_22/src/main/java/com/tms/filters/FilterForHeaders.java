@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.*;
 
-@WebFilter(value = "/*")
+@WebFilter(value = "/car")
 public class FilterForHeaders implements Filter {
 
     @Override
@@ -19,13 +19,14 @@ public class FilterForHeaders implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
-        List<String> headerNames = new ArrayList<>(Collections.list(httpRequest.getHeaderNames()));
+        ArrayList<String> headerNames = new ArrayList<>(Collections
+                .list(httpRequest.getHeaderNames()));
         String method = httpRequest.getMethod();
-            if ("GET".equalsIgnoreCase(method)||headerNames.contains("Name")) {
-                chain.doFilter(request, response);
-            } else {
-                throw new AccessFilterException();
-            }
+        if ("GET".equalsIgnoreCase(method) || headerNames.contains("name")) {
+            chain.doFilter(request, response);
+        } else {
+            throw new AccessFilterException();
+        }
     }
 
     @Override

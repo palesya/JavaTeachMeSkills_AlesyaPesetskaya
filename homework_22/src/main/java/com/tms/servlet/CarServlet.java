@@ -3,6 +3,7 @@ package com.tms.servlet;
 import objects.Car;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,7 @@ import java.io.PrintWriter;
 import java.util.Map;
 import java.util.TreeMap;
 
+@WebServlet("/car")
 public class CarServlet extends HttpServlet {
 
     Map<Integer, Car> cars = new TreeMap<>();
@@ -18,13 +20,13 @@ public class CarServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter writer = resp.getWriter();
-        if (!checkIdInRequest(req,resp)) {
+        if (!checkIdInRequest(req, resp)) {
             writer.println("The list of all cars is:");
             cars.forEach((key, value) -> writer.println(key + " : " + value));
         } else {
-            int id = getIdFromRequest(req,resp);
-            if (id>=0) {
-                writer.println("was found \n"+cars.get(id));
+            int id = getIdFromRequest(req, resp);
+            if (id >= 0) {
+                writer.println("was found \n" + cars.get(id));
             }
         }
     }
@@ -32,7 +34,7 @@ public class CarServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter writer = resp.getWriter();
-        if(checkIdInRequest(req,resp)){
+        if (checkIdInRequest(req, resp)) {
             writer.println("Id is generated automatically.");
         }
         int id = cars.size() + 1;
@@ -44,7 +46,7 @@ public class CarServlet extends HttpServlet {
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter writer = resp.getWriter();
-        if (checkIdInRequest(req,resp)) {
+        if (checkIdInRequest(req, resp)) {
             int id = getIdFromRequest(req, resp);
             if (id >= 0) {
                 cars.replace(id, createCar(req));
