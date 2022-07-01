@@ -59,6 +59,12 @@ button:hover {background-color: #455d7a}
     margin-top: 5px;
 }
 
+.success{
+    color: white;
+    text-align: center;
+    justify-content: center;
+}
+
 
 
 
