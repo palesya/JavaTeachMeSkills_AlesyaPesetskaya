@@ -1,11 +1,9 @@
 package com.objects;
 
-import com.exceptions.SaveUserException;
-
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static com.objects.User.Role.ADMIN;
 import static com.objects.User.Role.USER;
@@ -14,10 +12,10 @@ import static com.objects.User.Sex.WOMAN;
 
 public class UserContainer {
 
-    private List<User> userList;
-    List<User> defaultList = Arrays.asList(
-            new User("Alesya", "pass", ADMIN, WOMAN),
-            new User("Pavel", "pass1", USER, MAN));
+    private LinkedList<User> userList;
+    LinkedList<User> defaultList = new LinkedList<>(Arrays.asList(new User("Alesya", "pass", ADMIN, WOMAN),
+            new User("Pavel", "pass1", USER, MAN)));
+
 
     public UserContainer() {
         this.userList = defaultList;
