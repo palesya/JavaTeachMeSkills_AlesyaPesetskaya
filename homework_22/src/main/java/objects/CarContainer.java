@@ -50,7 +50,7 @@ public class CarContainer {
         return id;
     }
 
-    public boolean checkIdInRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public boolean findIdInRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         boolean isFound = true;
         if (req.getParameter("id") == null) {
             resp.getWriter().println("Id is not defined.");

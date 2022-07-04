@@ -13,7 +13,7 @@ import java.io.PrintWriter;
 import java.util.Map;
 
 @WebServlet("/car")
-public class CarServlet extends HttpServlet {
+public class CarService extends HttpServlet {
 
     CarContainer container = new CarContainer();
 
@@ -21,7 +21,7 @@ public class CarServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter writer = resp.getWriter();
         Map<Integer, Car> cars = container.getCars();
-        if (!container.checkIdInRequest(req, resp)) {
+        if (!container.findIdInRequest(req, resp)) {
             writer.println("The list of all cars is:");
             cars.forEach((key, value) -> writer.println(key + " : " + value));
         } else {
@@ -41,7 +41,7 @@ public class CarServlet extends HttpServlet {
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter writer = resp.getWriter();
         Map<Integer, Car> cars = container.getCars();
-        if (container.checkIdInRequest(req, resp)) {
+        if (container.findIdInRequest(req, resp)) {
             int id = container.returnIdIfFound(req, resp);
             if (id >= 0) {
                 cars.replace(id, container.createCar(req));
@@ -55,7 +55,7 @@ public class CarServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter writer = resp.getWriter();
         Map<Integer, Car> cars = container.getCars();
-        if (container.checkIdInRequest(req, resp)) {
+        if (container.findIdInRequest(req, resp)) {
             int id = container.returnIdIfFound(req, resp);
             if (id >= 0) {
                 cars.remove(id);
