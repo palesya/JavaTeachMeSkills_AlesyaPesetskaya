@@ -19,7 +19,7 @@ public class FilterForHeaders implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
-        ArrayList<String> headerNames = new ArrayList<>(Collections
+        List<String> headerNames = new ArrayList<>(Collections
                 .list(httpRequest.getHeaderNames()));
         String method = httpRequest.getMethod();
         if ("GET".equalsIgnoreCase(method) || headerNames.contains("name")) {
