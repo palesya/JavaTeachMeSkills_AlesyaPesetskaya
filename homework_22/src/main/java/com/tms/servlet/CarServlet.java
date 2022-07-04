@@ -25,7 +25,7 @@ public class CarServlet extends HttpServlet {
             writer.println("The list of all cars is:");
             cars.forEach((key, value) -> writer.println(key + " : " + value));
         } else {
-            int id = container.getIdFromRequest(req, resp);
+            int id = container.returnIdIfFound(req, resp);
             if (id >= 0) {
                 writer.println("was found \n" + cars.get(id));
             }
@@ -42,7 +42,7 @@ public class CarServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         Map<Integer, Car> cars = container.getCars();
         if (container.checkIdInRequest(req, resp)) {
-            int id = container.getIdFromRequest(req, resp);
+            int id = container.returnIdIfFound(req, resp);
             if (id >= 0) {
                 cars.replace(id, container.createCar(req));
                 writer.println("was updated");
@@ -56,7 +56,7 @@ public class CarServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         Map<Integer, Car> cars = container.getCars();
         if (container.checkIdInRequest(req, resp)) {
-            int id = container.getIdFromRequest(req, resp);
+            int id = container.returnIdIfFound(req, resp);
             if (id >= 0) {
                 cars.remove(id);
                 writer.println("was removed");

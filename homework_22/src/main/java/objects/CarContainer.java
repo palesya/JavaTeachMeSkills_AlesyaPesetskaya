@@ -38,7 +38,7 @@ public class CarContainer {
         return new Car(brand, year, color);
     }
 
-    public int getIdFromRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public int returnIdIfFound(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         PrintWriter writer = resp.getWriter();
         int id = Integer.parseInt(req.getParameter("id"));
         if (cars.containsKey(id)) {
