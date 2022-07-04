@@ -4,7 +4,6 @@ import com.exceptions.NoSuchUserException;
 import com.objects.User;
 import com.objects.UserContainer;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.objects.User.Role.ADMIN;
 
@@ -23,8 +23,9 @@ public class LoginServlet extends HttpServlet {
         UserContainer userContainer = new UserContainer();
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        if (userContainer.checkIfLoginAndPasswordExists(login, password)) {
-            List<User.Role> roles = userContainer.getRoleFromLoginPage(login, password);
+        List<User> user = userContainer.returnUser(login, password);
+        if (user.size() > 0) {
+            List<User.Role> roles = user.stream().map(User::getRole).collect(Collectors.toList());
             if (roles.contains(ADMIN)) {
                 resp.sendRedirect("/homework_24/adminPage");
             } else {
