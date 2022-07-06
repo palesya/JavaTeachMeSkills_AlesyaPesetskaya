@@ -1,6 +1,4 @@
-package com.tms.servlet;
-
-import org.apache.commons.lang3.StringUtils;
+package com.tms.lecture_22.filter.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,29 +7,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Map;
 
-@WebServlet(value = "/home")
-public class HomeServlet extends HttpServlet {
+@WebServlet(value = "/hello")
+public class HelloServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("get");
-        Map<String, String[]> parameterMap = req.getParameterMap();
-        StringBuilder builder = new StringBuilder();
-        parameterMap.forEach((s, strings) -> builder.append(s + " : " + strings[0] + "\n"));
-
-        String myheader = req.getHeader("myheader");
-
-        String app = req.getParameter("app");
-        PrintWriter writer = resp.getWriter();
-        writer.println("hello from servlet \n" + app + "\n" + builder);
-        writer.println(myheader);
+        req.getRequestDispatcher("/book").forward(req,resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        StringUtils.capitalize("dkjbw");
         PrintWriter writer = resp.getWriter();
         writer.println("hello from post");
     }

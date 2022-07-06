@@ -11,6 +11,7 @@
     <modules>
         <module>webAlesya</module>
         <module>homework_24</module>
+        <module>lecture_25</module>
     </modules>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

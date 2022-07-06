@@ -1,6 +1,6 @@
-package com.tms.filter;
+package com.tms.lecture_22.filter;
 
-import com.tms.servlet.AccessFilterException;
+import com.tms.lecture_22.filter.servlet.AccessFilterException;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
