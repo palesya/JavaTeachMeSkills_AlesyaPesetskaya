@@ -5,26 +5,4 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
 
-  <servlet>
-    <servlet-name>car</servlet-name>
-    <servlet-class>com.tms.servlet.CarServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-
-  <servlet>
-    <servlet-name>cookies</servlet-name>
-    <servlet-class>com.tms.servlet.CookieServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>car</servlet-name>
-    <url-pattern>/car</url-pattern>
-  </servlet-mapping>
-
-  <servlet-mapping>
-    <servlet-name>cookies</servlet-name>
-    <url-pattern>/car/cookies</url-pattern>
-  </servlet-mapping>
-
 </web-app>
