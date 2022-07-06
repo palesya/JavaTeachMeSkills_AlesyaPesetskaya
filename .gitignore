@@ -5,3 +5,7 @@ JavaTeachMeSkills_AlesyaPesetskaya.iml
 webAlesya.iml
 .idea
 /out
+*.iml
+*.ipr
+*.iws
+/target
