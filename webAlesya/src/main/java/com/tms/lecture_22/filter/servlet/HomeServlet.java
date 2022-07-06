@@ -1,6 +1,9 @@
-package com.tms.servlet;
+package com.tms.lecture_22.filter.servlet;
+
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 
+@WebServlet(value = "/home")
 public class HomeServlet extends HttpServlet {
 
     @Override
@@ -27,6 +31,7 @@ public class HomeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        StringUtils.capitalize("dkjbw");
         PrintWriter writer = resp.getWriter();
         writer.println("hello from post");
     }

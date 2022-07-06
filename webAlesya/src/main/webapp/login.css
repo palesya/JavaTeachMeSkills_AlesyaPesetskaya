@@ -1,0 +1,37 @@
+label{
+    color: white;
+    background-color: blue;
+}
+
+.txt{
+    color: red;
+}
+
+.parent_div{
+    display: flex;
+}
+
+div{
+    border: solid 2px black;
+}
+
+.left{
+     width: 50%;
+    float: left;
+ }
+
+.right{
+    width: 20%;
+    float: right;
+    margin-right: 30px;
+    margin-top: 5px;
+    padding: 20px;
+}
+
+button:hover{
+    background-color: red;
+}
+
+li:hover{
+    background-color: brown;
+}
