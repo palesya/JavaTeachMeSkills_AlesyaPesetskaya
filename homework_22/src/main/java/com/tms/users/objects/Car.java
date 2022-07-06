@@ -1,4 +1,4 @@
-package objects;
+package com.tms.users.objects;
 
 public class Car {
 

@@ -1,6 +1,6 @@
-package com.tms.filters;
+package com.tms.users.filters;
 
-import com.tms.exceptions.AccessFilterException;
+import com.tms.users.exceptions.AccessFilterException;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

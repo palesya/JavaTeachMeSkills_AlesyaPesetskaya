@@ -1,4 +1,4 @@
-package com.tms.exceptions;
+package com.tms.users.exceptions;
 
 public class AccessFilterException extends RuntimeException{
 }

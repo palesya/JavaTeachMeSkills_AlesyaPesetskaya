@@ -1,4 +1,4 @@
-package com.tms.servlet;
+package com.tms.users.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

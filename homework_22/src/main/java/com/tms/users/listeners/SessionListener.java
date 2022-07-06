@@ -1,4 +1,4 @@
-package com.tms.listeners;
+package com.tms.users.listeners;
 
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionEvent;
