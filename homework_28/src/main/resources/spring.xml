@@ -44,9 +44,16 @@
         <constructor-arg name="pair3" ref="pair3"/>
     </bean>
 
+    <bean name="userService" class="com.tms.service.UserBetService"/>
+
+    <bean name="pairRepository" class="com.tms.repository.PairDBRepository">
+        <constructor-arg name="dataBase" ref="database"/>
+    </bean>
+
     <bean name="racingService" class="com.tms.service.RacingService">
         <constructor-arg name="numberOfCircles" value="5"/>
-        <constructor-arg name="dataBase" ref="database"/>
+        <constructor-arg name="repository" ref="pairRepository"/>
+        <constructor-arg name="betService" ref="userService"/>
     </bean>
 
 </beans>

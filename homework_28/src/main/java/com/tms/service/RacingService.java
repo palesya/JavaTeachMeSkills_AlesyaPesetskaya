@@ -1,7 +1,7 @@
 package com.tms.service;
 
 import com.tms.model.Pair;
-import com.tms.model.PairDataBase;
+import com.tms.repository.PairDBRepository;
 import lombok.Data;
 
 import java.util.*;
@@ -11,41 +11,31 @@ import java.util.stream.Collectors;
 public class RacingService {
 
     private int numberOfCircles;
-    private PairDataBase dataBase;
+    private PairDBRepository repository;
+    private UserBetService betService;
 
-    private int betNumber;
     private String betHorseName;
     private List<Map.Entry<Pair, Double>> lastResults;
     private Map<Pair, Double> speedOfAllPairs = new HashMap<>();
 
-    public void askForPairNumber() {
-        System.out.println("What number do you want to bet on (from 1 to 3)?");
-        Scanner scanner = new Scanner(System.in);
-        betNumber = scanner.nextInt();
-        if (betNumber < 1 || betNumber > 3) {
-            System.out.println("We have only 3 pairs in this race. \nPlease, reenter number from 1 to 3.");
-            askForPairNumber();
-        }
-    }
-
-    public RacingService(int numberOfCircles, PairDataBase dataBase) {
+    public RacingService(int numberOfCircles, PairDBRepository repository, UserBetService betService) {
         this.numberOfCircles = numberOfCircles;
-        this.dataBase = dataBase;
+        this.repository = repository;
+        this.betService = betService;
     }
 
-    public void printPairsInfo() {
-        List<Pair> allPairs = dataBase.getAllPairs();
-        System.out.println("---------PARTICIPANTS---------");
-        for (int i = 0; i < allPairs.size(); i++) {
-            String horseName = allPairs.get(i).getHorse().getName();
-            String riderName = allPairs.get(i).getRider().getName();
-            System.out.println("Pair " + (i + 1) + " Horse " + horseName + ", Rider " + riderName);
+    public void startRace() throws InterruptedException {
+        for (int i = 0; i < numberOfCircles; i++) {
+            System.out.println("______________________________");
+            Thread.sleep(2000);
+            System.out.println("Results of circle " + (i + 1) + ":");
+            lastResults = returnCircleResults();
         }
-        betHorseName = allPairs.get(betNumber - 1).getHorse().getName();
+        checkIfWin();
     }
 
     private List<Map.Entry<Pair, Double>> returnCircleResults() {
-        List<Pair> allPairs = dataBase.getAllPairs();
+        List<Pair> allPairs = repository.getAllPairs();
         for (Pair pair : allPairs) {
             double totalSpeed = countSpeed(pair);
             if (speedOfAllPairs.get(pair) == null) {
@@ -66,25 +56,9 @@ public class RacingService {
         return sortedResults;
     }
 
-
-    private double countSpeed(Pair pair) {
-        double quality = pair.getRider().getQuality();
-        int horseSpeed = pair.getHorse().getSpeed();
-        double unexpectedConditions = 0.5 + (Math.random() * 0.9);
-        return (quality + 0.2) * horseSpeed * unexpectedConditions;
-    }
-
-    public void printResultsOfEachCircle() throws InterruptedException {
-        for (int i = 0; i < numberOfCircles; i++) {
-            System.out.println("______________________________");
-            Thread.sleep(2000);
-            System.out.println("Results of circle " + (i + 1) + ":");
-            lastResults = returnCircleResults();
-        }
-    }
-
-    public void checkIfWin() {
+    private void checkIfWin() {
         String nameHorseWinner = lastResults.get(0).getKey().getHorse().getName();
+        String betHorseName = repository.getHorseNameById(betService.getBetNumber());
         System.out.println("---------RESULTS---------");
         if (Objects.equals(nameHorseWinner, betHorseName)) {
             System.out.println("Congratulations!!!\nYour horse " + betHorseName + " won!!!");
@@ -93,5 +67,11 @@ public class RacingService {
         }
     }
 
+    private double countSpeed(Pair pair) {
+        double quality = pair.getRider().getQuality();
+        int horseSpeed = pair.getHorse().getSpeed();
+        double unexpectedConditions = 0.5 + (Math.random() * 0.9);
+        return (quality + 0.2) * horseSpeed * unexpectedConditions;
+    }
 
 }
