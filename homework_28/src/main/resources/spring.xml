@@ -45,7 +45,7 @@
     </bean>
 
     <bean name="racingService" class="com.tms.service.RacingService">
-        <constructor-arg name="numberOfCircles" value="3"/>
+        <constructor-arg name="numberOfCircles" value="5"/>
         <constructor-arg name="dataBase" ref="database"/>
     </bean>
 
