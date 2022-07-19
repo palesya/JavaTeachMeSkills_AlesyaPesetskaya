@@ -17,7 +17,7 @@ import java.util.UUID;
 public class HomeServlet extends HttpServlet {
 
     @Override
-    public void init() throws ServletException {
+    public void init() {
         CarDBStore dbStore = CarDBStore.getInstance();
         dbStore.addCar(new Car("Mazda","MX-5 Miata", Car.BodyStyle.CONVERTIBLE,50000));
         dbStore.addCar(new Car("Ford","Mustang", Car.BodyStyle.CONVERTIBLE,90000));
@@ -39,11 +39,12 @@ public class HomeServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String car_uuid = req.getParameter("carName");
         UUID uuid = UUID.fromString(car_uuid);
         CarDBStore dbStore = CarDBStore.getInstance();
-        Car carFromDB = dbStore.getAllCars().stream().filter(car -> car.getUuid().equals(uuid)).findFirst().get();
+        Car carFromDB = dbStore.getAllCars().stream()
+                .filter(car -> car.getUuid().equals(uuid)).findFirst().get();
         dbStore.deleteCar(carFromDB);
         resp.sendRedirect("http://localhost:8080/homework_27/home");
     }

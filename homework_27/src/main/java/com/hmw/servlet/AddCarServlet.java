@@ -3,8 +3,8 @@ package com.hmw.servlet;
 
 import com.hmw.dto.Car;
 import com.hmw.dto.CarDBStore;
+import org.apache.commons.lang3.StringUtils;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,11 +15,11 @@ import java.io.IOException;
 public class AddCarServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String brand = req.getParameter("brand").isEmpty() ? "no brand": req.getParameter("brand");
-        String model = req.getParameter("model").isEmpty() ? "no model": req.getParameter("model");
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String brand = StringUtils.isEmpty(req.getParameter("brand"))? "no brand" : req.getParameter("brand");
+        String model = StringUtils.isEmpty(req.getParameter("model")) ? "no model" : req.getParameter("model");
         String body = req.getParameter("body");
-        String price = req.getParameter("price").isEmpty() ? "0": req.getParameter("price");;
+        String price = StringUtils.isEmpty(req.getParameter("price")) ? "0" : req.getParameter("price");
 
         Car car = new Car(brand, model, Car.BodyStyle.valueOf(body), Integer.parseInt(price));
         CarDBStore dbStore = CarDBStore.getInstance();
