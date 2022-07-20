@@ -25,6 +25,8 @@ public class RacingService {
     }
 
     public void startRace() throws InterruptedException {
+        betService.askForPairNumber();
+        repository.printPairsInfo();
         for (int i = 0; i < numberOfCircles; i++) {
             System.out.println("______________________________");
             Thread.sleep(2000);
