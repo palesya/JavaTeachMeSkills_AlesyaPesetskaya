@@ -39,9 +39,13 @@
     </bean>
 
     <bean name="database" class="com.tms.model.PairDataBase">
-        <constructor-arg name="pair1" ref="pair1"/>
-        <constructor-arg name="pair2" ref="pair2"/>
-        <constructor-arg name="pair3" ref="pair3"/>
+        <property name="pairs">
+            <list value-type="com.tms.model.Pair">
+                <ref bean="pair1"/>
+                <ref bean="pair2"/>
+                <ref bean="pair3"/>
+            </list>
+        </property>
     </bean>
 
     <bean name="userService" class="com.tms.service.UserBetService"/>

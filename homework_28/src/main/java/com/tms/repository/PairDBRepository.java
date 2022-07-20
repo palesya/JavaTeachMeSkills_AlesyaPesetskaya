@@ -12,7 +12,7 @@ public class PairDBRepository {
     private PairDataBase dataBase;
 
     public void printPairsInfo() {
-        List<Pair> allPairs = dataBase.getAllPairs();
+        List<Pair> allPairs = dataBase.getPairs();
         System.out.println("---------PARTICIPANTS---------");
         for (int i = 0; i < allPairs.size(); i++) {
             String horseName = allPairs.get(i).getHorse().getName();
@@ -21,11 +21,11 @@ public class PairDBRepository {
         }
     }
     public String getHorseNameById(int id) {
-        return dataBase.getAllPairs().get(id).getHorse().getName();
+        return dataBase.getPairs().get(id).getHorse().getName();
     }
 
     public List<Pair> getAllPairs(){
-        return dataBase.getAllPairs();
+        return dataBase.getPairs();
     }
 }
 
