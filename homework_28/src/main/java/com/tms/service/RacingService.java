@@ -3,25 +3,30 @@ package com.tms.service;
 import com.tms.model.Pair;
 import com.tms.repository.PairDBRepository;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Service
 @Data
 public class RacingService {
 
+
     private int numberOfCircles;
+    @Autowired
     private PairDBRepository repository;
+    @Autowired
     private UserBetService betService;
 
     private String betHorseName;
     private List<Map.Entry<Pair, Double>> lastResults;
     private Map<Pair, Double> speedOfAllPairs = new HashMap<>();
 
-    public RacingService(int numberOfCircles, PairDBRepository repository, UserBetService betService) {
-        this.numberOfCircles = numberOfCircles;
-        this.repository = repository;
-        this.betService = betService;
+    public RacingService(@Value("3") int numberOfCircles) {
+        this.numberOfCircles=numberOfCircles;
     }
 
     public void startRace() throws InterruptedException {

@@ -1,9 +1,11 @@
 package com.tms.service;
 
 import lombok.Data;
+import org.springframework.stereotype.Service;
 
 import java.util.Scanner;
 
+@Service
 @Data
 public class UserBetService {
 

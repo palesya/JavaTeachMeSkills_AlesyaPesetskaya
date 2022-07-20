@@ -3,9 +3,11 @@ package com.tms.repository;
 import com.tms.model.Pair;
 import com.tms.model.PairDataBase;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 @AllArgsConstructor
 public class PairDBRepository {
 
