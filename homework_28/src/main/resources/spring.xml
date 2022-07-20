@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean name="horse1" class="com.tms.model.Horse">
+        <constructor-arg name="name" value="Snow White"/>
+    </bean>
+    <bean name="horse2" class="com.tms.model.Horse">
+        <constructor-arg name="name" value="Black Jack"/>
+    </bean>
+    <bean name="horse3" class="com.tms.model.Horse">
+        <constructor-arg name="name" value="Pirate"/>
+    </bean>
+
+    <bean name="rider1" class="com.tms.model.Rider">
+        <constructor-arg name="name" value="Alesya"/>
+    </bean>
+    <bean name="rider2" class="com.tms.model.Rider">
+        <constructor-arg name="name" value="Pavel"/>
+    </bean>
+    <bean name="rider3" class="com.tms.model.Rider">
+        <constructor-arg name="name" value="Sofiya"/>
+    </bean>
+
+    <bean name="pair1" class="com.tms.model.Pair">
+        <constructor-arg name="horse" ref="horse1"/>
+        <constructor-arg name="rider" ref="rider1"/>
+    </bean>
+
+    <bean name="pair2" class="com.tms.model.Pair">
+        <constructor-arg name="horse" ref="horse2"/>
+        <constructor-arg name="rider" ref="rider2"/>
+    </bean>
+
+    <bean name="pair3" class="com.tms.model.Pair">
+        <constructor-arg name="horse" ref="horse3"/>
+        <constructor-arg name="rider" ref="rider3"/>
+    </bean>
+
+    <bean name="database" class="com.tms.model.PairDataBase">
+        <property name="pairs">
+            <list value-type="com.tms.model.Pair">
+                <ref bean="pair1"/>
+                <ref bean="pair2"/>
+                <ref bean="pair3"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean name="userService" class="com.tms.service.UserBetService"/>
+
+    <bean name="pairRepository" class="com.tms.repository.PairDBRepository">
+        <constructor-arg name="dataBase" ref="database"/>
+    </bean>
+
+    <bean name="racingService" class="com.tms.service.RacingService">
+        <constructor-arg name="numberOfCircles" value="5"/>
+        <constructor-arg name="repository" ref="pairRepository"/>
+        <constructor-arg name="betService" ref="userService"/>
+    </bean>
+
+</beans>
