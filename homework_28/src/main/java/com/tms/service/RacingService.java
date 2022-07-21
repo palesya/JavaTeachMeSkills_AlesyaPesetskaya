@@ -7,12 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Data
 @Service
-public class RacingService {
+public class RacingService{
 
     private int numberOfCircles;
     @Autowired
@@ -28,15 +30,23 @@ public class RacingService {
         this.numberOfCircles = numberOfCircles;
     }
 
-    public void startRace() throws InterruptedException {
+    @PostConstruct
+    public void init() {
         betService.askForPairNumber();
         repository.printPairsInfo();
+    }
+
+    public void startRace() throws InterruptedException {
         for (int i = 0; i < numberOfCircles; i++) {
             System.out.println("______________________________");
             Thread.sleep(2000);
             System.out.println("Results of circle " + (i + 1) + ":");
             lastResults = returnCircleResults();
         }
+    }
+
+    @PreDestroy
+    public void destroyPreDestroy() {
         checkIfWin();
     }
 

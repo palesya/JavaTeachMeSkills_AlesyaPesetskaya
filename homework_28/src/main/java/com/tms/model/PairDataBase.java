@@ -13,8 +13,4 @@ public class PairDataBase {
     @Autowired
     private List<Pair> pairs;
 
-    public void setPairs(List<Pair> pairs) {
-        this.pairs=pairs;
-    }
-
 }
