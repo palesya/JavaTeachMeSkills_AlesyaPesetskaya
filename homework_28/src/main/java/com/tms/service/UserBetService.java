@@ -1,10 +1,12 @@
 package com.tms.service;
 
 import lombok.Data;
+import org.springframework.stereotype.Service;
 
 import java.util.Scanner;
 
 @Data
+@Service
 public class UserBetService {
 
     private int betNumber;
