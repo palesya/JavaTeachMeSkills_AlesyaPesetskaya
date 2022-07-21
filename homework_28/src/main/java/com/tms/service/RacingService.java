@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Service
 @Data
 @Service
 public class RacingService {
+
 
     private int numberOfCircles;
     @Autowired
