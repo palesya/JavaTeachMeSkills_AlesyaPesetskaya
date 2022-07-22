@@ -20,7 +20,7 @@
             </thead>
             <tbody>
             <c:forEach items="${cars}" var="car" varStatus="loop">
-                <form action="/homework_27/home" method="post">
+                <form action="http://localhost:8080/homework_27/home" method="post">
                     <tr>
                         <th scope="row">${loop.count}</th>
                         <td>${car.brand}</td>

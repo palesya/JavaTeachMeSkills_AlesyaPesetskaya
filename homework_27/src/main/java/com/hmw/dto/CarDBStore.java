@@ -9,8 +9,7 @@ public class CarDBStore {
 
     private static CarDBStore instance = null;
 
-    private CarDBStore() {
-
+    public CarDBStore() {
     }
 
     public static CarDBStore getInstance() {
@@ -19,6 +18,7 @@ public class CarDBStore {
         }
         return instance;
     }
+
 
     public void addCar(Car car) {
         cars.add(car);

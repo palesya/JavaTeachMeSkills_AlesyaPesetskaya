@@ -17,7 +17,7 @@ public class HomeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CarDBStore dbStore =CarDBStore.getInstance();
+        CarDBStore dbStore = CarDBStore.getInstance();
         List<Car> allCars = dbStore.getAllCars();
         req.setAttribute("cars", allCars);
         req.getRequestDispatcher("/index.jsp").forward(req, resp);

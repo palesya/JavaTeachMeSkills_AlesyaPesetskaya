@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="container">
-    <form action="/homework_27/addCar" method="post">
+    <form action="http://localhost:8080/homework_27/addCar" method="post">
         <div class="form-row">
             <div class="form-group col-md-2 mb-3">
                 <label for="inputBrand">Brand</label>
