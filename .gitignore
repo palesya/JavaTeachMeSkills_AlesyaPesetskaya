@@ -8,4 +8,4 @@ webAlesya.iml
 *.iml
 *.ipr
 *.iws
-/target
+*/target
