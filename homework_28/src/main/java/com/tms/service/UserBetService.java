@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Scanner;
 
-@Service
 @Data
+@Service
 public class UserBetService {
 
     private int betNumber;

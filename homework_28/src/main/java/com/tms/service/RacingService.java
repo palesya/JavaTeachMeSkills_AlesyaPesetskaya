@@ -1,5 +1,6 @@
 package com.tms.service;
 
+import com.tms.aop.Loggable;
 import com.tms.model.Pair;
 import com.tms.repository.PairDBRepository;
 import lombok.Data;
@@ -7,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Service
 @Data
-public class RacingService {
+@Service
+public class RacingService{
 
 
     private int numberOfCircles;
@@ -25,19 +28,28 @@ public class RacingService {
     private List<Map.Entry<Pair, Double>> lastResults;
     private Map<Pair, Double> speedOfAllPairs = new HashMap<>();
 
-    public RacingService(@Value("3") int numberOfCircles) {
-        this.numberOfCircles=numberOfCircles;
+    public RacingService(@Value("5") int numberOfCircles) {
+        this.numberOfCircles = numberOfCircles;
     }
 
-    public void startRace() throws InterruptedException {
+    @PostConstruct
+    public void init() {
         betService.askForPairNumber();
         repository.printPairsInfo();
+    }
+
+    @Loggable
+    public void startRace() throws InterruptedException {
         for (int i = 0; i < numberOfCircles; i++) {
             System.out.println("______________________________");
             Thread.sleep(2000);
             System.out.println("Results of circle " + (i + 1) + ":");
             lastResults = returnCircleResults();
         }
+    }
+
+    @PreDestroy
+    public void destroyPreDestroy() {
         checkIfWin();
     }
 
