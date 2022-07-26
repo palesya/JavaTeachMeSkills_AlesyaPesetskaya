@@ -13,8 +13,7 @@ public class DatabaseConfig {
     @Bean
     public Connection connection() throws SQLException, ClassNotFoundException {
         Class.forName("org.postgresql.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:postgres://localhost/postgres?user=postgres&password=alesya");
-        return connection;
+        return DriverManager.getConnection("jdbc:postgresql://localhost/postgres?user=postgres&password=alesya");
     }
 
 }
