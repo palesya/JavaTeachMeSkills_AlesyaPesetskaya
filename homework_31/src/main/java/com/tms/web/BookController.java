@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -28,12 +25,20 @@ public class BookController {
     }
 
     @PostMapping
-    public String searchBook(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ServletException, IOException {
+    public String searchBook(HttpServletRequest req) throws SQLException {
         String text = req.getParameter("search_text");
         req.setAttribute("text", text);
         List<Book> books = bookService.getBooksByPartialMatch(text);
         req.setAttribute("books", books);
         return "book";
+    }
+
+    @PostMapping(path = "/add")
+    public String addBook(HttpServletRequest req) throws SQLException {
+        String name = req.getParameter("book_name");
+        String author = req.getParameter("book_author");
+        bookService.save(new Book(name,author));
+        return "redirect:/book";
     }
 
 }
