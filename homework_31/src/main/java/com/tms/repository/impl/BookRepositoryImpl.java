@@ -24,7 +24,7 @@ public class BookRepositoryImpl implements BookRepository {
     @Override
     public void save(Book book) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SAVE_SQL);
-        statement.setString(1, book.getName());
+        statement.setString(1,book.getName());
         statement.setString(2,book.getAuthor());
         statement.execute();
         statement.close();
@@ -33,6 +33,14 @@ public class BookRepositoryImpl implements BookRepository {
     @Override
     public List<Book> getAllBooks() throws SQLException {
         PreparedStatement statement = connection.prepareStatement(GET_ALL_SQL);
+        ResultSet resultSet = statement.executeQuery();
+        return getBooks(resultSet,statement);
+    }
+
+    @Override
+    public List<Book> getBooksByPartialMatch(String text) throws SQLException {
+        String GET_BY_PARTIAL_MATCH = "select * from book where name LIKE '%"+text+"%' OR author LIKE '%"+text+"%'";
+        PreparedStatement statement = connection.prepareStatement(GET_BY_PARTIAL_MATCH);
         ResultSet resultSet = statement.executeQuery();
         return getBooks(resultSet,statement);
     }
