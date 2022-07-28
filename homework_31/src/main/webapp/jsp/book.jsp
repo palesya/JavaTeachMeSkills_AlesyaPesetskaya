@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <html>
 
 <head>
@@ -38,26 +40,25 @@
             </tbody>
         </table>
     </div>
-
-
-    <form action="book/add" method="post">
+    <sf:form action="book/add" method="post" modelAttribute="book">
         <div class="row mt-10">
             <h3>Add new book</h3>
         </div>
         <div class="row mb-3 col-5">
-            <label for="bookname" class="col-sm-2 col-form-label">Name</label>
+            <label for="book_name" class="col-sm-2 col-form-label">Name</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="bookname" name="book_name">
+                <sf:input path="name" class="form-control" id="book_name" name="book_name"/><sf:errors path="name"/>
             </div>
         </div>
         <div class="row mb-3 col-5">
             <label for="bookauthor" class="col-sm-2 col-form-label">Author</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="bookauthor" name="book_author">
+                <sf:input path="author" class="form-control" id="bookauthor" name="book_author"/><sf:errors
+                    path="author"/>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Add book</button>
-    </form>
+        <sf:button class="btn btn-primary">Add book</sf:button>
+    </sf:form>
 </div>
 </body>
 </html>
