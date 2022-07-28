@@ -6,16 +6,19 @@
     <title>Title</title>
 </head>
 <body>
+
+<%--<form action="user" method="post">--%>
+<%--    Login <input type="text" name="login"/>${login}<br>--%>
+<%--    Password <input type="password" name="password"/>${password}<br>--%>
+<%--    <input type="submit" name="submit" value="Submit">--%>
+<%--</form>--%>
+
 <sf:form action="user" method="post" modelAttribute="user">
-    Login <sf:input path="login"/>${error}<br>
-    Password <sf:password path="password"/><sf:errors path="password"/><br>
-    <sf:button>Login</sf:button><br>
+    Login: <sf:input path="login"/><sf:errors path="login"/><br>
+    Password: <sf:password path="password"/><sf:errors path="password"/><br>
+    <sf:button> Login </sf:button>
+
 </sf:form>
 
-<sf:form action="file" method="post" enctype="multipart/form-data">
-    <input type="file" name="file"/><br>
-    <input type="submit"/>
-</sf:form>
-${file}
 </body>
 </html>
