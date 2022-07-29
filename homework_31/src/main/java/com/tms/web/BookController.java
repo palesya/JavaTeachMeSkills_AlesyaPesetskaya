@@ -5,11 +5,10 @@ import com.tms.service.impl.BookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class BookController {
     private BookServiceImpl bookService;
 
     @GetMapping
-    public String get() {
+    public String get(Book book) {
         return "book";
     }
 
@@ -31,14 +30,14 @@ public class BookController {
             Model model) throws SQLException {
         List<Book> books = bookService.getBooksByPartialMatch(text);
         model.addAttribute("books", books);
+        model.addAttribute(new Book());
         return "book";
     }
 
     @PostMapping(path = "/add")
-    public String addBook(@RequestParam(name = "book_name")String name,
-                          @RequestParam(name = "book_author")String author) throws SQLException {
-        bookService.save(new Book(name, author));
-        return "redirect:/book";
+    public String addBook(@Valid @ModelAttribute("book") Book book, BindingResult result, Model model) throws SQLException {
+        bookService.save(book);
+        return "book";
     }
 
 }
