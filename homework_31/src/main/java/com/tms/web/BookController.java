@@ -37,7 +37,7 @@ public class BookController {
     @PostMapping(path = "/add")
     public String addBook(@Valid @ModelAttribute("book") Book book, BindingResult result, Model model) throws SQLException {
         bookService.save(book);
-        return "redirect:/book";
+        return "book";
     }
 
 }

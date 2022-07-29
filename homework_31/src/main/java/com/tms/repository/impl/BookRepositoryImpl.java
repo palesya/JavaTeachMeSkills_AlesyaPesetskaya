@@ -47,7 +47,7 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public List<Book> getBooksByPartialMatch(String text) throws SQLException {
-        String GET_BY_PARTIAL_MATCH = "select * from book where name LIKE '%" + text + "%' OR author LIKE '%" + text + "%'";
+        String GET_BY_PARTIAL_MATCH = "select * from book where LOWER(name) LIKE LOWER('%" + text + "%') OR LOWER(author) LIKE LOWER('%" + text + "%')";
         PreparedStatement statement = connection.prepareStatement(GET_BY_PARTIAL_MATCH);
         ResultSet resultSet = statement.executeQuery();
         return getBooks(resultSet, statement);

@@ -13,7 +13,7 @@
 <div class="container">
 
     <div class="row pt-2 col-6 pl-0">
-        <form action="book" method="post">
+        <form action="${pageContext.request.contextPath}/book" method="post">
             <input type="text" class="form-control" id="input" name="search_text">
             <button type="submit" class="btn btn-primary mb-2 col-2 mt-2">Search</button>
         </form>
@@ -40,7 +40,7 @@
             </tbody>
         </table>
     </div>
-    <sf:form action="book/add" method="post" modelAttribute="book">
+    <sf:form action="${pageContext.request.contextPath}/book/add" method="post" modelAttribute="book">
         <div class="row mt-10">
             <h3>Add new book</h3>
         </div>
@@ -59,6 +59,8 @@
         </div>
         <sf:button class="btn btn-primary">Add book</sf:button>
     </sf:form>
+    ${error}
 </div>
+
 </body>
 </html>
