@@ -6,9 +6,6 @@ import com.tms.model.Rider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Configuration
 public class RaceConfig {
 
@@ -57,12 +54,4 @@ public class RaceConfig {
         return new Pair(horse3(),rider3());
     }
 
-    @Bean
-    public List<Pair> pairs(){
-        List<Pair> pairs = new ArrayList<>();
-        pairs.add(pair1());
-        pairs.add(pair2());
-        pairs.add(pair3());
-        return pairs;
-    }
 }
