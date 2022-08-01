@@ -53,6 +53,14 @@ public class BookRepositoryImpl implements BookRepository {
         return getBooks(resultSet, statement);
     }
 
+    @Override
+    public List<Book> getBooksByNameAndAuthor(String name, String author) throws SQLException {
+        String GET_BY_NAME_AND_AUTHOR = "select * from book where LOWER(name)=LOWER('"+name+"') AND LOWER(author) = LOWER('" + author + "')";
+        PreparedStatement statement = connection.prepareStatement(GET_BY_NAME_AND_AUTHOR);
+        ResultSet resultSet = statement.executeQuery();
+        return getBooks(resultSet, statement);
+    }
+
     private List<Book> getBooks(ResultSet resultSet, PreparedStatement preparedStatement) throws SQLException {
         List<Book> books = new ArrayList<>();
         while (resultSet.next()) {

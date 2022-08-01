@@ -18,13 +18,11 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void save(Book book) throws SQLException {
-        List<Book> allSavedBooks = bookRepository.getAllBooks();
-        for (Book savedBook : allSavedBooks) {
-            if (book.getName().equalsIgnoreCase(savedBook.getName()) && book.getAuthor().equalsIgnoreCase(savedBook.getAuthor())) {
-                throw new SaveBookException("Such book with name " + book.getName() +
-                        " and author " + book.getAuthor() + " already exists");
+        List<Book> booksMatches = bookRepository.getBooksByNameAndAuthor(book.getName(), book.getAuthor());
+        if (booksMatches.size() > 0) {
+            throw new SaveBookException("Such book with name " + book.getName().toUpperCase() +
+                    " and author " + book.getAuthor().toUpperCase() + " already exists");
 
-            }
         }
         if (!book.getName().isBlank() && !book.getAuthor().isBlank()) {
             bookRepository.save(book);

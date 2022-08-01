@@ -10,4 +10,5 @@ public interface BookRepository {
     void save(Book book) throws SQLException;
     List<Book> getAllBooks() throws SQLException;
     List<Book> getBooksByPartialMatch(String text) throws SQLException;
+    List<Book> getBooksByNameAndAuthor(String name, String author) throws SQLException;
 }
