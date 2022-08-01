@@ -41,13 +41,6 @@ public class BookRepositoryImpl implements BookRepository {
     }
 
     @Override
-    public List<Book> getAllBooks() throws SQLException {
-        PreparedStatement statement = connection.prepareStatement(GET_ALL_SQL);
-        ResultSet resultSet = statement.executeQuery();
-        return getBooks(resultSet, statement);
-    }
-
-    @Override
     public List<Book> getBooksByPartialMatch(String text) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(GET_BY_PARTIAL_MATCH);
         statement.setString(1, "%"+text+"%");
