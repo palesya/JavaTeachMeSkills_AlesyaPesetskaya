@@ -1,5 +1,6 @@
 package com.tms.service.impl;
 
+import com.tms.exception.SaveBookException;
 import com.tms.model.Book;
 import com.tms.repository.impl.BookRepositoryImpl;
 import com.tms.service.BookService;
@@ -17,7 +18,15 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void save(Book book) throws SQLException {
-        bookRepository.save(book);
+        List<Book> booksMatches = bookRepository.getBooksByNameAndAuthor(book.getName(), book.getAuthor());
+        if (booksMatches.size() > 0) {
+            throw new SaveBookException("Such book with name " + book.getName().toUpperCase() +
+                    " and author " + book.getAuthor().toUpperCase() + " already exists");
+
+        }
+        if (!book.getName().isBlank() && !book.getAuthor().isBlank()) {
+            bookRepository.save(book);
+        }
     }
 
     @Override
