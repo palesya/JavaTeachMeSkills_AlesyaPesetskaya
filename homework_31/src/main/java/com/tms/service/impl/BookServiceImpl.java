@@ -30,11 +30,6 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> getAll() throws SQLException {
-        return bookRepository.getAllBooks();
-    }
-
-    @Override
     public List<Book> getBooksByPartialMatch(String text) throws SQLException {
         return bookRepository.getBooksByPartialMatch(text);
     }

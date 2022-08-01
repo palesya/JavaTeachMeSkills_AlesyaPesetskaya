@@ -19,6 +19,7 @@ public class BookRepositoryImpl implements BookRepository {
     public static final String GET_ALL_SQL = "select * from book";
     public static final String GET_MAX_ID = "SELECT max(id) FROM book";
     public static final String GET_BY_NAME_AND_AUTHOR = "select * from book where LOWER(name)=LOWER(?) AND LOWER(author) = LOWER(?)";
+    String GET_BY_PARTIAL_MATCH = "select * from book where LOWER(name) LIKE LOWER(?) OR LOWER(author) LIKE LOWER(?)";
 
     @Autowired
     private Connection connection;
@@ -43,16 +44,15 @@ public class BookRepositoryImpl implements BookRepository {
     public List<Book> getAllBooks() throws SQLException {
         PreparedStatement statement = connection.prepareStatement(GET_ALL_SQL);
         ResultSet resultSet = statement.executeQuery();
-        statement.close();
         return getBooks(resultSet, statement);
     }
 
     @Override
     public List<Book> getBooksByPartialMatch(String text) throws SQLException {
-        String GET_BY_PARTIAL_MATCH = "select * from book where LOWER(name) LIKE LOWER('%" + text + "%') OR LOWER(author) LIKE LOWER('%" + text + "%')";
         PreparedStatement statement = connection.prepareStatement(GET_BY_PARTIAL_MATCH);
+        statement.setString(1, "%"+text+"%");
+        statement.setString(2, "%"+text+"%");
         ResultSet resultSet = statement.executeQuery();
-        statement.close();
         return getBooks(resultSet, statement);
     }
 
@@ -62,7 +62,6 @@ public class BookRepositoryImpl implements BookRepository {
         statement.setString(1, name);
         statement.setString(2, author);
         ResultSet resultSet = statement.executeQuery();
-        statement.close();
         return getBooks(resultSet, statement);
     }
 
@@ -74,6 +73,7 @@ public class BookRepositoryImpl implements BookRepository {
             Book book = new Book(name, author);
             books.add(book);
         }
+        preparedStatement.close();
         return books;
     }
 
