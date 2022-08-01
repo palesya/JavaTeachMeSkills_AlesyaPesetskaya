@@ -16,7 +16,6 @@ import java.util.List;
 public class BookRepositoryImpl implements BookRepository {
 
     public static final String SAVE_SQL = "insert into book (id, name, author) values(?,?,?)";
-    public static final String GET_ALL_SQL = "select * from book";
     public static final String GET_MAX_ID = "SELECT max(id) FROM book";
     public static final String GET_BY_NAME_AND_AUTHOR = "select * from book where LOWER(name)=LOWER(?) AND LOWER(author) = LOWER(?)";
     public static final String GET_BY_PARTIAL_MATCH = "select * from book where LOWER(name) LIKE LOWER(?) OR LOWER(author) LIKE LOWER(?)";
