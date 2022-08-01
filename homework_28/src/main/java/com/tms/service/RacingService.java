@@ -1,5 +1,6 @@
 package com.tms.service;
 
+import com.tms.aop.Loggable;
 import com.tms.model.Pair;
 import com.tms.repository.PairDBRepository;
 import lombok.Data;
@@ -37,6 +38,7 @@ public class RacingService{
         repository.printPairsInfo();
     }
 
+    @Loggable
     public void startRace() throws InterruptedException {
         for (int i = 0; i < numberOfCircles; i++) {
             System.out.println("______________________________");
