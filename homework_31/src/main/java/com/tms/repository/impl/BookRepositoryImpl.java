@@ -2,17 +2,16 @@ package com.tms.repository.impl;
 
 import com.tms.model.Book;
 import com.tms.repository.BookRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class BookRepositoryImpl implements BookRepository {
 
     public static final String SAVE_SQL = "insert into book (id, name, author) values(?,?,?)";
@@ -20,61 +19,30 @@ public class BookRepositoryImpl implements BookRepository {
     public static final String GET_BY_NAME_AND_AUTHOR = "select * from book where LOWER(name)=LOWER(?) AND LOWER(author) = LOWER(?)";
     public static final String GET_BY_PARTIAL_MATCH = "select * from book where LOWER(name) LIKE LOWER(?) OR LOWER(author) LIKE LOWER(?)";
 
-    @Autowired
-    private Connection connection;
+    private final JdbcTemplate jdbcTemplate;
+    private final RowMapper<Book> mapper;
 
     @Override
     public void save(Book book) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement(SAVE_SQL);
-        int id;
-        if (getMaxID() == 0) {
-            id = 1;
-        } else {
-            id = getMaxID() + 1;
-        }
-        statement.setInt(1, id);
-        statement.setString(2, book.getName());
-        statement.setString(3, book.getAuthor());
-        statement.execute();
-        statement.close();
+        int id = getMaxID()+1;
+        jdbcTemplate.update(SAVE_SQL, id, book.getName(), book.getAuthor());
     }
 
     @Override
-    public List<Book> getBooksByPartialMatch(String text) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement(GET_BY_PARTIAL_MATCH);
-        statement.setString(1, "%"+text+"%");
-        statement.setString(2, "%"+text+"%");
-        ResultSet resultSet = statement.executeQuery();
-        return getBooks(resultSet, statement);
+    public List<Book> getBooksByPartialMatch(String text) {
+        return jdbcTemplate.query(GET_BY_PARTIAL_MATCH,mapper,"%" + text + "%","%" + text + "%");
     }
 
     @Override
-    public List<Book> getBooksByNameAndAuthor(String name, String author) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement(GET_BY_NAME_AND_AUTHOR);
-        statement.setString(1, name);
-        statement.setString(2, author);
-        ResultSet resultSet = statement.executeQuery();
-        return getBooks(resultSet, statement);
-    }
-
-    private List<Book> getBooks(ResultSet resultSet, PreparedStatement preparedStatement) throws SQLException {
-        List<Book> books = new ArrayList<>();
-        while (resultSet.next()) {
-            String name = resultSet.getString("name");
-            String author = resultSet.getString("author");
-            Book book = new Book(name, author);
-            books.add(book);
-        }
-        preparedStatement.close();
-        return books;
+    public List<Book> getBooksByNameAndAuthor(String name, String author) {
+        return jdbcTemplate.query(GET_BY_NAME_AND_AUTHOR, mapper,name,author);
     }
 
     private int getMaxID() throws SQLException {
-        PreparedStatement statement = connection.prepareStatement(GET_MAX_ID);
-        ResultSet maxIDStatement = statement.executeQuery();
+        Integer maxIndexInDB = jdbcTemplate.queryForObject(GET_MAX_ID, Integer.class);
         int maxID = 0;
-        if (maxIDStatement.next()) {
-            maxID = maxIDStatement.getInt(1);
+        if (maxIndexInDB != null) {
+            maxID = maxIndexInDB;
         }
         return maxID;
     }
