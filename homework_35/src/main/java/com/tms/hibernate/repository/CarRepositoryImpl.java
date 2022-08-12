@@ -43,10 +43,10 @@ public class CarRepositoryImpl implements CarRepository {
     public void changeAvailability(Integer id) {
         Session session = factory.openSession();
         Transaction transaction = session.beginTransaction();
-        Car carForChange = session.get(Car.class, id);
-        boolean newAvailability = !carForChange.isAvailable();
-        carForChange.setAvailable(newAvailability);
-        session.update(carForChange);
+        Car carFromDB = session.get(Car.class, id);
+        boolean available = carFromDB.isAvailable();
+        carFromDB.setAvailable(!available);
+        session.update(carFromDB);
         transaction.commit();
         session.close();
     }
@@ -64,4 +64,18 @@ public class CarRepositoryImpl implements CarRepository {
         transaction.commit();
         return resultList;
     }
+
+    @Override
+    public List<Integer> getAllIds() {
+        Session session = factory.openSession();
+        Transaction transaction = session.beginTransaction();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Integer> criteriaQuery = builder.createQuery(Integer.class);
+        Root<Car> root = criteriaQuery.from(Car.class);
+        CriteriaQuery<Integer> id = criteriaQuery.select(root.get("id"));
+        List<Integer> resultList = session.createQuery(id).getResultList();
+        transaction.commit();
+        return resultList;
+    }
+
 }

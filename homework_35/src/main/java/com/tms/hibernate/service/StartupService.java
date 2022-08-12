@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 import static com.tms.hibernate.model.BRAND.*;
 
@@ -36,11 +35,6 @@ public class StartupService {
         for (Car car : cars) {
             repository.save(car);
         }
-        repository.remove(11);
-        repository.changeAvailability(1);
-        List<Car> allCars = repository.getAllCars();
-        for (Car car : allCars) {
-            System.out.println(car);
-        }
+        System.out.println(repository.getAllIds());
     }
 }

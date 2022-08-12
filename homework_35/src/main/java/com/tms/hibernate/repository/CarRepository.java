@@ -10,4 +10,5 @@ public interface CarRepository {
     void remove (Integer id);
     void changeAvailability(Integer id);
     List<Car> getAllCars();
+    List<Integer> getAllIds();
 }
