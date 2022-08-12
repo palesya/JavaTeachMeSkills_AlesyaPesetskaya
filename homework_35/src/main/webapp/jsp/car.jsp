@@ -14,11 +14,11 @@
 </head>
 
 <body>
+<div class="container">
 <h1>List of all cars from database</h1>
 <table class="table">
     <thead>
     <tr>
-        <th scope="col">#</th>
         <th scope="col">Id</th>
         <th scope="col">Brand</th>
         <th scope="col">Number</th>
@@ -46,7 +46,7 @@
 </table>
 
 <h3>Change availability of car with id:</h3>
-<form action="car" method="post">
+<form action="${pageContext.request.contextPath}/car" method="post">
     <select name="selected_id">
         <option selected="selected">0</option>
         <c:forEach items="${ids}" var="id">
@@ -55,6 +55,16 @@
     </select>
     <input type="submit" value="Submit">
 </form>
-
+<h3>Delete car with id:</h3>
+<form action="${pageContext.request.contextPath}/car/delete" method="post">
+    <select name="selected_id">
+        <option selected="selected">0</option>
+        <c:forEach items="${ids}" var="id">
+            <option>${id}</option>
+        </c:forEach>
+    </select>
+    <input type="submit" value="Submit">
+</form>
+</div>
 </body>
 </html>

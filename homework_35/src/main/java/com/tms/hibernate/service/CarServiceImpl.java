@@ -27,4 +27,9 @@ public class CarServiceImpl implements CarService {
     public List<Integer> getAllIds() {
         return repository.getAllIds();
     }
+
+    @Override
+    public void remove(Integer id) {
+        repository.remove(id);
+    }
 }

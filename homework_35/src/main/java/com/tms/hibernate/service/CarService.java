@@ -10,4 +10,5 @@ public interface CarService {
     List<Car> getAllCars() throws SQLException;
     void changeAvailability(Integer id);
     List<Integer> getAllIds();
+    void remove (Integer id);
 }

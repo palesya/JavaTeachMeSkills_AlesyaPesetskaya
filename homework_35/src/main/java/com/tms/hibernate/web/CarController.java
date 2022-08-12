@@ -23,6 +23,8 @@ public class CarController {
     public String get(Model model) {
         List<Car> allCars = carService.getAllCars();
         model.addAttribute("cars", allCars);
+        List<Integer> allIds = carService.getAllIds();
+        model.addAttribute("ids", allIds);
         return "car";
     }
 
@@ -37,6 +39,22 @@ public class CarController {
         }
         List<Car> allCars = carService.getAllCars();
         model.addAttribute("cars", allCars);
+        return "car";
+    }
+
+    @PostMapping("/delete")
+    public String deleteCar(
+            @RequestParam(name = "selected_id") int id,
+            Model model) {
+        List<Integer> allIds = carService.getAllIds();
+        model.addAttribute("ids", allIds);
+        if (id > 0) {
+            carService.remove(id);
+        }
+        List<Car> allCars = carService.getAllCars();
+        model.addAttribute("cars", allCars);
+        List<Integer> allIds1 = carService.getAllIds();
+        model.addAttribute("ids", allIds1);
         return "car";
     }
 
