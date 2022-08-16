@@ -46,7 +46,6 @@ public class CarRepositoryImpl implements CarRepository {
         Car carFromDB = session.get(Car.class, id);
         boolean available = carFromDB.isAvailable();
         carFromDB.setAvailable(!available);
-        session.update(carFromDB);
         transaction.commit();
         session.close();
     }

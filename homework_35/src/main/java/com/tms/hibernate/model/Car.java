@@ -5,6 +5,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "cars")
@@ -113,5 +114,10 @@ public class Car {
                 ", available=" + available +
                 ", version=" + version +
                 '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, number, brand, dateProduced, created, updated, available, version);
     }
 }
