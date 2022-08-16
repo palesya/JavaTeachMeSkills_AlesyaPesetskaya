@@ -1,0 +1,13 @@
+server:
+  port: 8090
+spring:
+  config:
+    activate:
+      on-profile: dev
+      file_path: homework_34/src/main/java/com/tms/springboot/files/dev.txt
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+      file_path: homework_34/src/main/java/com/tms/springboot/files/test.txt
