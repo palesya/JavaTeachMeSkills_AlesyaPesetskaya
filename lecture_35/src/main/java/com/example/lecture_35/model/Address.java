@@ -1,11 +1,20 @@
 package com.example.lecture_35.model;
 
-import javax.persistence.Embeddable;
+import javax.persistence.*;
+import java.util.List;
 
-@Embeddable
+@Entity
+@Table(name = "address")
 public class Address {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String city;
     private int home;
+
+    @ManyToMany(mappedBy = "address")
+    private List<User> user;
+
 
     public Address() {
     }
@@ -31,11 +40,29 @@ public class Address {
         this.home = home;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<User> getUser() {
+        return user;
+    }
+
+    public void setUser(List<User> user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "Address{" +
-                "city='" + city + '\'' +
+                "id=" + id +
+                ", city='" + city + '\'' +
                 ", home=" + home +
+                // ", user=" + user.getUserInfo() +
                 '}';
     }
 }

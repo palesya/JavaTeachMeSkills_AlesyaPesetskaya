@@ -1,5 +1,8 @@
 package com.example.lecture_35.config;
 
+import com.example.lecture_35.model.Address;
+import com.example.lecture_35.model.Pet;
+import com.example.lecture_35.model.Phone;
 import com.example.lecture_35.model.User;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
@@ -34,6 +37,9 @@ public class DataBaseConfig {
         configuration.setProperty("hibernate.format_sql", "true");
         configuration.setProperty("hibernate.hbm2ddl.auto", "create-drop");
         configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(Address.class);
+        configuration.addAnnotatedClass(Phone.class);
+        configuration.addAnnotatedClass(Pet.class);
         return configuration;
     }
 
