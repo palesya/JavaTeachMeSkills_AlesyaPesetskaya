@@ -15,7 +15,7 @@ public class FileController {
 
     @Bean
     public void addCounterToFile() throws IOException {
-        service.addCounter();
+            service.addCounter();
     }
 
 }

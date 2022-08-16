@@ -1,7 +1,9 @@
 package com.tms.springboot.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -10,22 +12,17 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import java.util.Arrays;
 
 @Service
+@Controller
 public class FileCreationService {
 
     @Autowired
     Environment environment;
+    @Value("${spring.config.activate.file_path}")
+    private Path path;
 
     public void addCounter() throws IOException {
-        String[] activeProfiles = environment.getActiveProfiles();
-        Path path = null;
-        if (Arrays.stream(activeProfiles).anyMatch(el -> el.contains("dev"))) {
-            path = Path.of("homework_34/src/main/java/com/tms/springboot/files/dev.txt");
-        } else if (Arrays.stream(activeProfiles).anyMatch(el -> el.contains("test"))) {
-            path = Path.of("homework_34/src/main/java/com/tms/springboot/files/test.txt");
-        }
         if (path != null) {
             int currentIndex = getLastIndex(path) + 1;
             String line = System.lineSeparator() + currentIndex;
