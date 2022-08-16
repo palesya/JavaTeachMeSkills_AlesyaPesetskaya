@@ -1,6 +1,8 @@
 package com.tms.hibernate.config;
 
 import com.tms.hibernate.model.Car;
+import com.tms.hibernate.model.Client;
+import com.tms.hibernate.model.Region;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -34,6 +36,8 @@ public class DataBaseConfig {
         configuration.setProperty("hibernate.format_sql", "true");
         configuration.setProperty("hibernate.hbm2ddl.auto", "create-drop");
         configuration.addAnnotatedClass(Car.class);
+        configuration.addAnnotatedClass(Region.class);
+        configuration.addAnnotatedClass(Client.class);
         return configuration;
     }
 

@@ -5,6 +5,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -27,6 +28,10 @@ public class Car {
     private boolean available;
     @Version
     private int version;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Client client;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Region> regions;
 
     public Car() {
     }
@@ -102,17 +107,30 @@ public class Car {
         this.version = version;
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public List<Region> getRegions() {
+        return regions;
+    }
+
+    public void setRegions(List<Region> regions) {
+        this.regions = regions;
+    }
+
     @Override
     public String toString() {
         return "Car{" +
-                "id=" + id +
-                ", number='" + number + '\'' +
+                "number='" + number + '\'' +
                 ", brand=" + brand +
                 ", dateProduced=" + dateProduced +
-                ", created=" + created +
-                ", updated=" + updated +
                 ", available=" + available +
-                ", version=" + version +
+                ", regions=" + regions +
                 '}';
     }
 

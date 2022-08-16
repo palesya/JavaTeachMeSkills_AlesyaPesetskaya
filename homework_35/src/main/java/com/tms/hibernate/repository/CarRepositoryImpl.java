@@ -1,6 +1,7 @@
 package com.tms.hibernate.repository;
 
 import com.tms.hibernate.model.Car;
+import com.tms.hibernate.model.Region;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -19,12 +20,18 @@ public class CarRepositoryImpl implements CarRepository {
     @Autowired
     private SessionFactory factory;
 
-
     @Override
     public void save(Car car) {
         Session session = factory.openSession();
         Transaction transaction = session.beginTransaction();
+        List<Region> regions = car.getRegions();
+        if (regions!= null) {
+            regions.forEach(session::save);
+        }
         session.save(car);
+        if (regions!= null) {
+            car.setRegions(regions);
+        }
         transaction.commit();
         session.close();
     }
