@@ -31,7 +31,6 @@ public class User {
     @Column(updatable = false)
     private Date created;
     @UpdateTimestamp
-    @Column
     private Date updated;
     @Version
     private int version;
