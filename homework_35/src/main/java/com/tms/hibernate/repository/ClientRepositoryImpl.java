@@ -31,9 +31,9 @@ public class ClientRepositoryImpl implements ClientRepository {
         Session session = factory.openSession();
         Transaction transaction = session.beginTransaction();
         List<Car> cars=client.getCars();
-        cars.forEach(session::save);
-        client.setCars(cars);
         session.save(client);
+        client.setCars(cars);
+        cars.forEach(add->add.setClient(client));
         transaction.commit();
         session.close();
     }

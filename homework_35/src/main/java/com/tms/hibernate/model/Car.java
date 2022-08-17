@@ -28,8 +28,8 @@ public class Car {
     private boolean available;
     @Version
     private int version;
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    private Client client;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Client client;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Region> regions;
 
@@ -106,14 +106,14 @@ public class Car {
     public void setVersion(int version) {
         this.version = version;
     }
-//
-//    public Client getClient() {
-//        return client;
-//    }
-//
-//    public void setClient(Client client) {
-//        this.client = client;
-//    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
 
     public List<Region> getRegions() {
         return regions;
