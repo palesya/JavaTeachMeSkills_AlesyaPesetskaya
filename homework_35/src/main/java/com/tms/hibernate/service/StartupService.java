@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.tms.hibernate.model.BRAND.*;
@@ -47,24 +48,21 @@ public class StartupService {
         Region gomel = new Region(GOMEL);
         Region mogilev = new Region(MOGILEV);
 
-        car1.setRegions(List.of(minsk,brest));
-        car6.setRegions(List.of(vitebsk,grodno));
-        car10.setRegions(List.of(gomel,mogilev));
+        car1.setRegions(List.of(minsk, brest));
+        car6.setRegions(List.of(vitebsk, grodno));
+        car10.setRegions(List.of(gomel, mogilev));
 
-//        List<Car> rentedCars = new ArrayList<>();
-//        rentedCars.add(car1);
-//        rentedCars.add(car6);
-//        rentedCars.add(car10);
-
-        Client client = new Client("Vasya","Rich",34);
-
-        car1.setClient(client);
-        car6.setClient(client);
-        car10.setClient(client);
-        clientRepository.save(client);
+        List<Car> rentedCars = new ArrayList<>();
+        rentedCars.add(car1);
+        rentedCars.add(car6);
+        rentedCars.add(car10);
         for (Car car : cars) {
             carRepository.save(car);
         }
+        Client client = new Client("Vasya", "Rich", 34);
+        client.setCars(rentedCars);
+        clientRepository.save(client);
+
 
     }
 }

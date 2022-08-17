@@ -13,7 +13,7 @@ public class Client {
     private String name;
     private String surname;
     private int age;
-    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER)
     List<Car> cars;
 
     public Client(String name, String surname, int age) {
