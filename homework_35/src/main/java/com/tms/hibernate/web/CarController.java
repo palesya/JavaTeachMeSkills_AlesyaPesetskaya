@@ -30,7 +30,10 @@ public class CarController {
         List<Integer> allIds = carService.getAllIds();
         model.addAttribute("ids", allIds);
         Client client = clientService.getClientById(1);
+        System.out.println("---------------------------");
+        System.out.println(client);
         List<Car> clientCars = client.getCars();
+        System.out.println(clientCars);
         model.addAttribute("client",client);
         model.addAttribute("client_cars",clientCars);
         return "car";

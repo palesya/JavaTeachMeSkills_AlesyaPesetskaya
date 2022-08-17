@@ -28,7 +28,7 @@ public class Car {
     private boolean available;
     @Version
     private int version;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Client client;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Region> regions;
@@ -126,16 +126,24 @@ public class Car {
     @Override
     public String toString() {
         return "Car{" +
-                "number='" + number + '\'' +
+                "id=" + id +
+                ", number='" + number + '\'' +
                 ", brand=" + brand +
                 ", dateProduced=" + dateProduced +
-                ", available=" + available +
                 ", regions=" + regions +
                 '}';
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Car car = (Car) o;
+        return available == car.available && version == car.version && Objects.equals(id, car.id) && Objects.equals(number, car.number) && brand == car.brand && Objects.equals(dateProduced, car.dateProduced) && Objects.equals(created, car.created) && Objects.equals(updated, car.updated) && Objects.equals(client, car.client) && Objects.equals(regions, car.regions);
+    }
+
+    @Override
     public int hashCode() {
-        return Objects.hash(id, number, brand, dateProduced, created, updated, available, version);
+        return Objects.hash(id, number, brand, dateProduced, created, updated, available, version, client, regions);
     }
 }

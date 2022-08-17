@@ -2,6 +2,7 @@ package com.tms.hibernate.model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "client")
@@ -13,7 +14,7 @@ public class Client {
     private String name;
     private String surname;
     private int age;
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "client")
     List<Car> cars;
 
     public Client(String name, String surname, int age) {
@@ -73,5 +74,18 @@ public class Client {
                 ", surname='" + surname + '\'' +
                 ", age=" + age +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Client client = (Client) o;
+        return age == client.age && Objects.equals(id, client.id) && Objects.equals(name, client.name) && Objects.equals(surname, client.surname) && Objects.equals(cars, client.cars);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, surname, age, cars);
     }
 }
