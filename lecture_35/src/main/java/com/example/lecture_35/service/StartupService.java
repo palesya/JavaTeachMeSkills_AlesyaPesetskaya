@@ -26,11 +26,11 @@ public class StartupService {
     @PostConstruct
     public void init() {
         User user = new User("user_login", "user_password", WOMAN);
-
+        user.setId(2);
         user.setDate(new Date());
         User user1 = new User("user_login1", "user_password1", MAN);
-        Address address1 = new Address("Minsk", 1);
-        Address address2 = new Address("Vitebsk", 23);
+        Address address1 = new Address("Minsk2", 1);
+        Address address2 = new Address("Vitebsk2", 23);
         List<Address> addresses = new ArrayList<>();
         addresses.add(address1);
         addresses.add(address2);
@@ -44,7 +44,11 @@ public class StartupService {
         user1.setPhone(phone);
         user1.setDate(new Date());
         user1.setPets(pets);
+        user.setPhone(phone);
+        user.setDate(new Date());
+        user.setPets(pets);
         repository.save(user1);
+        //repository.save(user);
         System.out.println("--------------");
         System.out.println(user1.getAddress().get(0).getCity());
         System.out.println("--------------");

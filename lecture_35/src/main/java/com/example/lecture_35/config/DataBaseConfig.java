@@ -35,7 +35,7 @@ public class DataBaseConfig {
         configuration.setProperty("hibernate.dialect", dialect);
         configuration.setProperty("hibernate.show_sql", "true");
         configuration.setProperty("hibernate.format_sql", "true");
-        configuration.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+        configuration.setProperty("hibernate.hbm2ddl.auto", "create");
         configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(Address.class);
         configuration.addAnnotatedClass(Phone.class);

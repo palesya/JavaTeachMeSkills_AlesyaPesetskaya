@@ -42,9 +42,9 @@ public class UserRepositoryImpl implements UserRepository {
         session.save(phone);
 
         List<Address> address = user.getAddress();
-        address.forEach(session::save);
+        address.forEach(session::saveOrUpdate);
 
-        session.save(user);
+        session.saveOrUpdate(user);
 
         user.setPets(pets);
         user.setPhone(phone);
@@ -65,5 +65,28 @@ public class UserRepositoryImpl implements UserRepository {
         session.update(userFromDB);
         transaction.commit();
         session.close();
+    }
+
+    @Override
+    public void delete(Integer id) {
+        Session session = factory.openSession();
+        Transaction transaction = session.beginTransaction();
+        User user = session.find(User.class, id);
+        if(user!=null){
+            session.remove(user);
+        }
+        transaction.commit();
+        session.close();
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        Session session = factory.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        List<User> from_user = session.createQuery("From User", User.class).list();
+        transaction.commit();
+        session.close();
+        return from_user;
     }
 }
