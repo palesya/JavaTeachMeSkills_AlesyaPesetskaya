@@ -3,6 +3,7 @@ package com.tms.bootdatajpa.repository;
 import com.tms.bootdatajpa.model.User;
 import com.tms.bootdatajpa.model.UserProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
@@ -11,9 +12,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
 
     List<User> getByLogin(String login);
+
+    User getById(Long id);
 
     List<User> getByIsActiveIsTrue();
 
