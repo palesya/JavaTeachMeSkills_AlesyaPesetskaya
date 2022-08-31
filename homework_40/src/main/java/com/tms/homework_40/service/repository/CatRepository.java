@@ -1,4 +1,4 @@
-package com.tms.homework_40.repository;
+package com.tms.homework_40.service.repository;
 
 import com.tms.homework_40.model.Cat;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,7 +1,7 @@
 package com.tms.homework_40.service;
 
 import com.tms.homework_40.model.Cat;
-import com.tms.homework_40.repository.CatRepository;
+import com.tms.homework_40.service.repository.CatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class StartupService {
 
     @Autowired
-    CatRepository repository;
+    private CatRepository repository;
 
     @PostConstruct
     public void init(){
