@@ -1,6 +1,5 @@
 package com.tms.homework_40.web;
 
-import com.tms.homework_40.controller.Handler;
 import com.tms.homework_40.dto.CatDTO;
 import com.tms.homework_40.model.Cat;
 import com.tms.homework_40.service.CatServiceImpl;
@@ -19,7 +18,6 @@ public class CatController {
     CatServiceImpl catService;
 
     @GetMapping("/{catId}")
-    @ExceptionHandler(Handler.class)
     public ResponseEntity<Object> getById(@PathVariable("catId") Long catId) {
         Cat catFromDB = catService.getById(catId);
         CatDTO catDTO = createCatDTO(catFromDB);
