@@ -1,7 +1,9 @@
 package com.tms.hibernate.web;
 
 import com.tms.hibernate.model.Car;
+import com.tms.hibernate.model.Client;
 import com.tms.hibernate.service.CarServiceImpl;
+import com.tms.hibernate.service.ClientServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,8 @@ public class CarController {
 
     @Autowired
     private CarServiceImpl carService;
+    @Autowired
+    private ClientServiceImpl clientService;
 
     @GetMapping
     public String get(Model model) {
@@ -25,6 +29,13 @@ public class CarController {
         model.addAttribute("cars", allCars);
         List<Integer> allIds = carService.getAllIds();
         model.addAttribute("ids", allIds);
+        Client client = clientService.getClientById(1);
+        System.out.println("---------------------------");
+        System.out.println(client);
+        List<Car> clientCars = client.getCars();
+        System.out.println(clientCars);
+        model.addAttribute("client",client);
+        model.addAttribute("client_cars",clientCars);
         return "car";
     }
 

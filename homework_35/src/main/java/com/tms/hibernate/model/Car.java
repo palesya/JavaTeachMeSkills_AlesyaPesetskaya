@@ -5,6 +5,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -27,6 +28,10 @@ public class Car {
     private boolean available;
     @Version
     private int version;
+    @ManyToOne
+    private Client client;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Region> regions;
 
     public Car() {
     }
@@ -102,6 +107,22 @@ public class Car {
         this.version = version;
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public List<Region> getRegions() {
+        return regions;
+    }
+
+    public void setRegions(List<Region> regions) {
+        this.regions = regions;
+    }
+
     @Override
     public String toString() {
         return "Car{" +
@@ -109,15 +130,20 @@ public class Car {
                 ", number='" + number + '\'' +
                 ", brand=" + brand +
                 ", dateProduced=" + dateProduced +
-                ", created=" + created +
-                ", updated=" + updated +
-                ", available=" + available +
-                ", version=" + version +
+                ", regions=" + regions +
                 '}';
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Car car = (Car) o;
+        return available == car.available && Objects.equals(id, car.id) && Objects.equals(number, car.number) && brand == car.brand && Objects.equals(dateProduced, car.dateProduced) && Objects.equals(client, car.client) && Objects.equals(regions, car.regions);
+    }
+
+    @Override
     public int hashCode() {
-        return Objects.hash(id, number, brand, dateProduced, created, updated, available, version);
+        return Objects.hash(id, number, brand, dateProduced, available, client, regions);
     }
 }
