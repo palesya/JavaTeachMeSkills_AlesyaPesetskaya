@@ -139,11 +139,11 @@ public class Car {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Car car = (Car) o;
-        return available == car.available && version == car.version && Objects.equals(id, car.id) && Objects.equals(number, car.number) && brand == car.brand && Objects.equals(dateProduced, car.dateProduced) && Objects.equals(created, car.created) && Objects.equals(updated, car.updated) && Objects.equals(client, car.client) && Objects.equals(regions, car.regions);
+        return available == car.available && Objects.equals(id, car.id) && Objects.equals(number, car.number) && brand == car.brand && Objects.equals(dateProduced, car.dateProduced) && Objects.equals(client, car.client) && Objects.equals(regions, car.regions);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, number, brand, dateProduced, created, updated, available, version, client, regions);
+        return Objects.hash(id, number, brand, dateProduced, available, client, regions);
     }
 }

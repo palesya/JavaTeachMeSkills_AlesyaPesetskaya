@@ -11,7 +11,7 @@ import java.io.IOException;
 public class FileController {
 
     @Autowired
-    FileCreationService service;
+    private FileCreationService service;
 
     @Bean
     public void addCounterToFile() throws IOException {
