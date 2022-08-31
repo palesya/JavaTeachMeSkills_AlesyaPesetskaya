@@ -18,7 +18,7 @@ public class CatController {
     CatServiceImpl catService;
 
     @GetMapping("/{catId}")
-    public ResponseEntity<Object> getById(@PathVariable("catId") Long catId) {
+    public ResponseEntity<CatDTO> getById(@PathVariable("catId") Long catId) {
         Cat catFromDB = catService.getById(catId);
         CatDTO catDTO = createCatDTO(catFromDB);
         System.out.println("get cat from db with id = " + catId);
@@ -45,7 +45,7 @@ public class CatController {
     }
 
     @PutMapping("/{catId}")
-    public ResponseEntity<Object> updateCat(@RequestBody Cat cat,
+    public ResponseEntity<CatDTO> updateCat(@RequestBody Cat cat,
                                             @PathVariable("catId") Long catId) {
         Cat catFromDB = catService.getById(catId);
         catFromDB.setBreed(cat.getBreed());
