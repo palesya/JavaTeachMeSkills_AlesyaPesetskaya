@@ -1,14 +1,24 @@
 package com.tms.springrest.web;
 
+import com.tms.springrest.dto.ErrorDTO;
 import com.tms.springrest.dto.SEX;
 import com.tms.springrest.dto.User;
+import io.swagger.v3.oas.annotations.headers.Header;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api/user")
+@Tag(name = "My home controller", description = "This controller is used for user's CRUD operations.")
 public class UserController {
 
     @GetMapping("/{userId}")
@@ -23,12 +33,27 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-//    @GetMapping()
-//    public User getAll(){
-//        return Arrays.asList(new User("asa","sdd",));
-//    }
+    @GetMapping()
+    @Tag(name = "get All", description = "Get all users")
+    public ResponseEntity<List<User>> getAll() {
+        return ResponseEntity.ok(Arrays.asList(new User(20L, "name", "pass", SEX.MAN, new Date()),
+                new User(21L, "name21", "pass21", SEX.WOMAN, new Date())));
+    }
 
     @PostMapping
+    @Tag(name = "POST for user",
+            description = "Saves information about new User")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "success operation", headers = {
+                    @Header(name = "My header", required = true, description = "just for test")},
+                    content = {
+                            @Content(schema = @Schema(implementation = User.class))
+                    }),
+            @ApiResponse(responseCode = "400", description = "something broken",
+                    content = {
+                            @Content(schema = @Schema(implementation = ErrorDTO.class))
+                    })
+    })
     public ResponseEntity<User> addUser(@RequestBody User user) {
         System.out.println("created user " + user);
         return ResponseEntity.ok(user);

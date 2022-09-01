@@ -9,7 +9,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
 import java.util.Date;
 import java.util.List;
 
@@ -19,11 +18,9 @@ public class StartupService {
 
     @Autowired
     UserRepository repository;
-    private EntityManager manager;
 
     @PostConstruct
     public void init() {
-//        manager.lock(new User(), LockModeType.OPTIMISTIC_FORCE_INCREMENT);
         User user1 = User.builder()
                 .login("user1")
                 .password("pass")
@@ -45,6 +42,10 @@ public class StartupService {
                 .birthday(new Date())
                 .build();
 
+        repository.save(user1);
+        repository.save(user2);
+        repository.save(user3);
+
 //        PageRequest of = PageRequest.of(0, 2);
 //        PageRequest pageRequest = PageRequest.ofSize(1);
 //        Page<User> all = repository.findAll(pageRequest);
@@ -63,7 +64,6 @@ public class StartupService {
         List<User> all = repository.findAll(userSpecification);
         System.out.println(all);
 
-        //User save = repository.save(user3);
 
 
 //        Criteria criteria = session.createCriteria(User.class);
@@ -80,9 +80,7 @@ public class StartupService {
 //        User userFromDB = (User) criteria.uniqueResult();
 
 //
-//        repository.save(user1);
-//        repository.save(user2);
-//        repository.save(user3);
+//
 //
 //        List<User> usersFromDB = repository.getByIsActiveIsTrue();
 //        for (User user : usersFromDB) {

@@ -16,6 +16,8 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
 
     List<User> getByLogin(String login);
 
+    List<User> getAll();
+
     User getById(Long id);
 
     List<User> getByIsActiveIsTrue();
@@ -26,9 +28,6 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
 
     @Query("select u from User u where u.login=:login")
     List<User> findMyUser(String login);
-
-    @Query(value = "select count(*) from users",nativeQuery = true)
-    long count();
 
     List<User> getOnlyActive();
 
