@@ -9,12 +9,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.hateoas.Link;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping(path = "/api/user")
@@ -36,8 +40,13 @@ public class UserController {
     @GetMapping()
     @Tag(name = "get All", description = "Get all users")
     public ResponseEntity<List<User>> getAll() {
-        return ResponseEntity.ok(Arrays.asList(new User(20L, "name", "pass", SEX.MAN, new Date()),
-                new User(21L, "name21", "pass21", SEX.WOMAN, new Date())));
+        User user1 = new User(20L, "name", "pass", SEX.MAN, new Date());
+        User user2 = new User(21L, "name21", "pass21", SEX.WOMAN, new Date());
+        Link link1 = linkTo(methodOn(UserController.class).get(20L)).withSelfRel();
+        Link link2 = linkTo(methodOn(UserController.class).get(21L)).withSelfRel();
+        user1.add(link1);
+        user2.add(link2);
+        return ResponseEntity.ok(Arrays.asList(user1, user2));
     }
 
     @PostMapping
