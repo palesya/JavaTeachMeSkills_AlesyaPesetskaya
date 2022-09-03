@@ -3,6 +3,7 @@ package com.tms.homework_40.service;
 import com.tms.homework_40.model.Cat;
 import com.tms.homework_40.repository.CatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,6 +32,11 @@ public class CatServiceImpl implements CatService {
     @Override
     public void deleteById(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public List<Cat> getAllBySearch(Specification<Cat> specification) {
+        return repository.findAll(specification);
     }
 
 }
