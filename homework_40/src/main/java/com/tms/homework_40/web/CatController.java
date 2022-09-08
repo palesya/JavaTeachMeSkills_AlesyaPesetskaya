@@ -27,7 +27,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RestController
 @RequestMapping(path = "/api/cat")
 @Tag(name = "Main cat controller", description = "This controller is used for cats' CRUD operations.")
-public class CatController {
+public class CatController{
 
     @Autowired
     CatServiceImpl catService;
