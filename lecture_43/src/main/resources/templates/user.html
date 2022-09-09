@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+hello
+
+<div th:text="${@userService.getVersion()}"></div>
+
+<a th:href="@{http://google.ru/search}">Search</a>
+
+<div th:text="${person.allInfo()}"></div>
+<div th:text="${3 gt 5}"></div>
+<br>
+
+<div th:text="${attribute.user.name}"></div>
+
+<div th:text="${users[0].name}"></div>
+<p>Testing</p>
+
+<div th:text="#{title.label}"></div>
+<p>[[${person.name}]]</p>
+
+<div th:if="${person.isAdmin}"> This text is visible only for Admin</div>
+
+<div th:each="user,item : ${users}">
+    <p th:text="${item.count}"></p>
+    <p th:text="${user.name}"></p>
+    <p th:text="${user.isAdmin}"></p>
+    <p th:text="${user.age}"></p>
+    <br>
+</div>
+
+<input type="text" th:value="${person.age}">
+
+<form th:object="${person}">
+    <input type="text" th:value="*{name}">
+    <input type="number" th:value="*{age}">
+</form>
+
+<br>
+<img src="cat.jpeg"/>
+</body>
+</html>
