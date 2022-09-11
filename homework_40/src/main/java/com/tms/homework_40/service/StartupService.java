@@ -21,7 +21,12 @@ public class StartupService {
         Cat cat3 = new Cat("Lapa", "seam", 10);
 
         List<Cat> cats = List.of(cat1, cat2, cat3);
-        repository.saveAll(cats);
+        for (Cat cat : cats) {
+            int numberOfMatches = repository.findByName(cat.getName()).size();
+            if (numberOfMatches == 0) {
+                repository.save(cat);
+            }
+        }
     }
 
 }
