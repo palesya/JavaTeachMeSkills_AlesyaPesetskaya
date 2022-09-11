@@ -42,4 +42,5 @@ public class Cat {
         this.breed = breed;
         this.age = age;
     }
+
 }

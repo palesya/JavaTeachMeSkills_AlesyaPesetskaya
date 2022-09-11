@@ -1,6 +1,7 @@
 package com.tms.homework_40.service;
 
 import com.tms.homework_40.model.Cat;
+import com.tms.homework_40.model.SearchRequest;
 import com.tms.homework_40.repository.CatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
@@ -15,16 +16,6 @@ public class CatServiceImpl implements CatService {
     private CatRepository repository;
 
     @Override
-    public List<Cat> getAll() {
-        return repository.getAll();
-    }
-
-    @Override
-    public Cat getById(Long id) {
-        return repository.getById(id);
-    }
-
-    @Override
     public void saveCat(Cat cat) {
         repository.save(cat);
     }
@@ -35,8 +26,16 @@ public class CatServiceImpl implements CatService {
     }
 
     @Override
-    public List<Cat> getAllBySearch(Specification<Cat> specification) {
-        return repository.findAll(specification);
+    public List<Cat> getAllBySearch(SearchRequest request) {
+        Specification<Cat> catSpecification = CatSpecificationService.getCatSpecification(request);
+        return repository.findAll(catSpecification);
     }
 
+    public Cat getById(Long catId) {
+        return repository.getReferenceById(catId);
+    }
+
+    public List<Cat> getAll() {
+        return repository.findAll();
+    }
 }
