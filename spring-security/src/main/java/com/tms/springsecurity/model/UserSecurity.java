@@ -6,28 +6,34 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserSecurity implements UserDetails {
 
-    private User user;
+    private String name;
+    private String password;
+    private List<String> roles;
 
-    public UserSecurity(User user) {
-        this.user = user;
+    public UserSecurity(String name, String password, List<String> roles) {
+        this.name = name;
+        this.password=password;
+        this.roles=roles;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("read"));
+        return roles.stream().
+                map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return this.password;
     }
 
     @Override
     public String getUsername() {
-        return user.getLogin();
+        return this.name;
     }
 
     @Override
