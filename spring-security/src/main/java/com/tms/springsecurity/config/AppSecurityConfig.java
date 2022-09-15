@@ -1,5 +1,6 @@
 package com.tms.springsecurity.config;
 
+import com.tms.springsecurity.service.SecurityLogFilter;
 import com.tms.springsecurity.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -42,7 +44,9 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user").hasRole("USER")
                 .antMatchers("/admin").hasRole("ADMIN")
                 .and()
-                .formLogin();
+                .formLogin()
+                .and()
+                .addFilterBefore(new SecurityLogFilter(), LogoutFilter.class);
     }
 
 }
