@@ -1,4 +1,4 @@
-package com.tms.homework_45.Service;
+package com.tms.homework_45.service;
 
 import com.tms.homework_45.model.Role;
 import com.tms.homework_45.model.User;

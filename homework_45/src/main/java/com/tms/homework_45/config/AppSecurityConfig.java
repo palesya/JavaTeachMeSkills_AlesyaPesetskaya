@@ -1,6 +1,6 @@
 package com.tms.homework_45.config;
 
-import com.tms.homework_45.Service.UserDetailsServiceImpl;
+import com.tms.homework_45.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
