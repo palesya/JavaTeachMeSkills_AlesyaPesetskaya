@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    username: postgres
+    password: alesya
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost/postgres
+
+  jpa:
+    hibernate:
+      ddl-auto: 'update'
+
+server:
+  port: 8092
