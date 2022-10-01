@@ -24,7 +24,7 @@ public class TokenProvider {
 
     public static final String AUTH_KEY = "auth";
 
-    @Value("svetbrkntiml;y8;lmrnb6jvr5thb4hrh55445h5h4j4e5svetbrkntiml;y8;lmrnb6jvr5thb4hrh55445h5h4j4e5svetbrkntiml;y8;lmrnb6jvr5thb4hrh55445h5h4j4e5svetbrkntiml;y8;lmrnb6jvr5thb4hrh55445h5h4j4e5svetbrkntiml;y8;lmrnb6jvr5thb4hrh55445h5h4j4e5svetbrkntiml;y8;lmrnb6jvr5thb4hrh554")
+    @Value("${key}")
     private String secret;
     private SecretKey secretKey;
 

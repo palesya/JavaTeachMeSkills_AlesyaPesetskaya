@@ -3,7 +3,6 @@ package com.hmw.homework_46.filter;
 import com.hmw.homework_46.service.TokenProvider;
 import com.hmw.homework_46.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -20,8 +19,7 @@ import java.io.IOException;
 public class TokenGenerationFilter extends OncePerRequestFilter {
 
     private final UserService service;
-    @Autowired
-    private TokenProvider provider;
+    private final TokenProvider provider;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
