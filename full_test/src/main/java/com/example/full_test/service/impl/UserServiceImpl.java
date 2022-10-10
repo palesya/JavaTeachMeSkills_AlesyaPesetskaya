@@ -1,5 +1,6 @@
 package com.example.full_test.service.impl;
 
+import com.example.full_test.dto.UserDto;
 import com.example.full_test.exception.UserAlreadyExistException;
 import com.example.full_test.exception.UserNotValidException;
 import com.example.full_test.model.User;
@@ -7,6 +8,7 @@ import com.example.full_test.repository.UserRepository;
 import com.example.full_test.service.UserService;
 import com.example.full_test.service.UserValidator;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -27,8 +29,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getById(Long id) {
-        return repository.getById(id);
+    @Transactional
+    public UserDto getById(Long id) {
+        User byId = repository.getById(id);
+        UserDto build = UserDto.builder()
+                .id(byId.getId())
+                .login(byId.getLogin())
+                .password(byId.getPassword()).build();
+        return build;
     }
 
     @Override
@@ -37,11 +45,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User save(User user) {
+    @Transactional
+    public UserDto save(UserDto userDto) {
+
+        User user = new User(userDto.getId(), userDto.getLogin(), userDto.getPassword());
+
         if (validator.isValidForSave(user)) {
             User byLogin = repository.getByLogin(user.getLogin());
             if (byLogin == null) {
-                return repository.save(user);
+                if(user.getPassword()==null||user.getPassword().isBlank()){
+                    user.setPassword("default");
+                }
+                User save = repository.save(user);
+                return UserDto.builder()
+                        .id(save.getId())
+                        .login(save.getLogin())
+                        .password(save.getPassword())
+                        .build();
             } else {
                 throw new UserAlreadyExistException();
             }

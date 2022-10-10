@@ -1,5 +1,6 @@
 package com.example.full_test.service;
 
+import com.example.full_test.dto.UserDto;
 import com.example.full_test.model.User;
 
 import java.util.List;
@@ -7,9 +8,9 @@ import java.util.List;
 public interface UserService {
 
     List<User> getAll();
-    User getById(Long id);
+    UserDto getById(Long id);
     User getByLogin(String login);
-    User save(User user);
+    UserDto save(UserDto user);
     void delete(User user);
     User update(User user);
 

@@ -1,5 +1,6 @@
 package com.example.full_test.service.impl;
 
+import com.example.full_test.dto.UserDto;
 import com.example.full_test.exception.UserAlreadyExistException;
 import com.example.full_test.exception.UserNotValidException;
 import com.example.full_test.model.User;
@@ -26,7 +27,7 @@ public class UserServiceImplTest {
 
     @Test
     void saveWithValidUser() {
-        User user = User.builder()
+        UserDto user = UserDto.builder()
                 .login("Petya")
                 .build();
 
@@ -35,17 +36,19 @@ public class UserServiceImplTest {
                 .login("Ivan")
                 .build();
 
-        Mockito.when(mockValidator.isValidForSave(user)).thenReturn(true);
-        Mockito.when(mockRepository.save(user)).thenReturn(userFromDB);
+        User userForSave = new User(user.getLogin(),null);
 
-        User save = service.save(user);
+        Mockito.when(mockValidator.isValidForSave(userForSave)).thenReturn(true);
+        Mockito.when(mockRepository.save(userForSave)).thenReturn(userFromDB);
+
+        UserDto save = service.save(user);
 
         Assertions.assertEquals(20L, save.getId());
     }
 
     @Test
     void saveWithExistUser() {
-        User user = User.builder()
+        UserDto user = UserDto.builder()
                 .login("Ivan")
                 .build();
 
@@ -54,18 +57,20 @@ public class UserServiceImplTest {
                 .login("Ivan")
                 .build();
 
-        Mockito.when(mockValidator.isValidForSave(user)).thenReturn(true);
+        User userForSave = new User(user.getLogin(),null);
+
+        Mockito.when(mockValidator.isValidForSave(userForSave)).thenReturn(true);
         Mockito.when(mockRepository.getByLogin("Ivan")).thenReturn(userFromDB);
 
         Assertions.assertThrows(UserAlreadyExistException.class, () ->
                 service.save(user));
 
-        Mockito.verify(mockRepository, Mockito.never()).save(user);
+        Mockito.verify(mockRepository, Mockito.never()).save(userForSave);
     }
 
     @Test
     void saveUserWithId() {
-        User user = User.builder()
+        UserDto user = UserDto.builder()
                 .id(20L)
                 .login("Ivan")
                 .build();
@@ -73,13 +78,15 @@ public class UserServiceImplTest {
         //mockRepository = Mockito.mock(UserRepository.class);
         mockValidator = Mockito.mock(UserValidatorImpl.class);
 
-        Mockito.when(mockValidator.isValidForSave(user)).thenCallRealMethod();
+        User userForSave = new User(user.getLogin(),null);
+
+        Mockito.when(mockValidator.isValidForSave(userForSave)).thenCallRealMethod();
 
         service = new UserServiceImpl(mockValidator, mockRepository);
 
         Assertions.assertThrows(UserNotValidException.class, () -> service.save(user));
         Mockito.verify(mockRepository, Mockito.never()).getByLogin("Ivan");
-        Mockito.verify(mockRepository, Mockito.never()).save(user);
+        Mockito.verify(mockRepository, Mockito.never()).save(userForSave);
     }
 
     @Test
